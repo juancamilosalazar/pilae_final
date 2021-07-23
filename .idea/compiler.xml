@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile default="true" name="Default" enabled="true" />
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="Transversal" />
+        <module name="Mensajes_Datos" />
+        <module name="Mensajes_DTO" />
+        <module name="Mensajes_Negocio" />
+        <module name="Pilae_dto" />
+        <module name="Pilae_controlador" />
+        <module name="Pilae_transversal" />
+        <module name="Mensajes_Transversal" />
+        <module name="Mensajes_Api" />
+        <module name="Pilae_servicio" />
+        <module name="Pilae_infraestructura" />
+        <module name="Pilae_entidad" />
+        <module name="Pilae_dominio" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="Mensajes_Api" target="11" />
+      <module name="Mensajes_Datos" target="1.8" />
+      <module name="Mensajes_DTO" target="11" />
+      <module name="Mensajes_Negocio" target="1.8" />
+      <module name="Mensajes_Transversal" target="1.8" />
+      <module name="Pilae_controlador" target="1.8" />
+      <module name="Pilae_dominio" target="11" />
+      <module name="Pilae_dto" target="11" />
+      <module name="Pilae_entidad" target="11" />
+      <module name="Pilae_infraestructura" target="11" />
+      <module name="Pilae_servicio" target="11" />
+      <module name="Pilae_transversal" target="11" />
+      <module name="Transversal" target="11" />
+      <module name="UCOBANK_Api" target="11" />
+      <module name="UCOBANK_Datos" target="1.8" />
+      <module name="UCOBANK_Dominio" target="11" />
+      <module name="UCOBANK_DTO" target="11" />
+      <module name="UCOBANK_Entidad" target="1.8" />
+      <module name="UCOBANK_Negocio" target="11" />
+      <module name="UCOBANK_Transversal" target="11" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="Mensajes_Api" options="-parameters" />
+      <module name="Mensajes_Datos" options="-parameters" />
+      <module name="Mensajes_Negocio" options="-parameters" />
+      <module name="Mensajes_Transversal" options="-parameters" />
+      <module name="Pilae_controlador" options="-parameters" />
+      <module name="UCOBANK_Api" options="-parameters" />
+      <module name="UCOBANK_Datos" options="-parameters" />
+      <module name="UCOBANK_Entidad" options="-parameters" />
+    </option>
+  </component>
+</project>

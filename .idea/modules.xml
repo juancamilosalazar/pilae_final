@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Mensajes_Api/Mensajes_Api.iml" filepath="$PROJECT_DIR$/Mensajes_Api/Mensajes_Api.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Mensajes_DTO/Mensajes_DTO.iml" filepath="$PROJECT_DIR$/Mensajes_DTO/Mensajes_DTO.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Mensajes_Datos/Mensajes_Datos.iml" filepath="$PROJECT_DIR$/Mensajes_Datos/Mensajes_Datos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Mensajes_Negocio/Mensajes_Negocio.iml" filepath="$PROJECT_DIR$/Mensajes_Negocio/Mensajes_Negocio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Mensajes_Transversal/Mensajes_Transversal.iml" filepath="$PROJECT_DIR$/Mensajes_Transversal/Mensajes_Transversal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Pilae_controlador/Pilae_controlador.iml" filepath="$PROJECT_DIR$/Pilae_controlador/Pilae_controlador.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Pilae_dominio/Pilae_dominio.iml" filepath="$PROJECT_DIR$/Pilae_dominio/Pilae_dominio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Pilae_dto/Pilae_dto.iml" filepath="$PROJECT_DIR$/Pilae_dto/Pilae_dto.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Pilae_entidad/Pilae_entidad.iml" filepath="$PROJECT_DIR$/Pilae_entidad/Pilae_entidad.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Pilae_infraestructura/Pilae_infraestructura.iml" filepath="$PROJECT_DIR$/Pilae_infraestructura/Pilae_infraestructura.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Pilae_servicio/Pilae_servicio.iml" filepath="$PROJECT_DIR$/Pilae_servicio/Pilae_servicio.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Pilae_transversal/Pilae_transversal.iml" filepath="$PROJECT_DIR$/Pilae_transversal/Pilae_transversal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Transversal/Transversal.iml" filepath="$PROJECT_DIR$/Transversal/Transversal.iml" />
+      <module fileurl="file://$PROJECT_DIR$/final-pilae.iml" filepath="$PROJECT_DIR$/final-pilae.iml" />
+    </modules>
+  </component>
+</project>
