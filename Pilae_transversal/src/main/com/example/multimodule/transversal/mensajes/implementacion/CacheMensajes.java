@@ -12,7 +12,7 @@ public class CacheMensajes implements MensajesEstrategia {
 
 	private CacheMensajes() {
 		// Se debe poder consultar en el cat�logo de par�metros
-		String endPoint = "http://localhost:8080/api/mensaje/{1}/{2}";
+		String endPoint = "http://localhost:8090/api/mensaje/{1}/{2}";
 		String nombreAplicacion = "pilae";
 		CatalogoMensajes.inicializar(endPoint, nombreAplicacion);
 	}

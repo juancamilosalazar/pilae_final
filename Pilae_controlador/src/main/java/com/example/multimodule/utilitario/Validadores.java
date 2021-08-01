@@ -8,7 +8,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Validadores<T> {
 
-    public void validarDatosCodigo(String codigo, Respuesta<Equipo> respuesta, boolean datosValidos){
+    public void validarDatosCodigo(String codigo, Respuesta<T> respuesta, boolean datosValidos){
 
         if (UtilTexto.estaVacia(codigo)) {
             String mensajeUsuario = "El código  es un dato obligatorio!";
@@ -26,7 +26,7 @@ public class Validadores<T> {
 
     }
 
-    public void validarDatosNombre(String nombre, Respuesta<Equipo> respuesta, boolean datosValidos){
+    public void validarDatosNombre(String nombre, Respuesta<T> respuesta, boolean datosValidos){
 
         if (UtilTexto.estaVacia(nombre)) {
             String mensajeUsuario = "El nombre es un dato obligatorio!";
