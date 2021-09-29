@@ -1,0 +1,16 @@
+package com.example.multimodule.servicio.fachada;
+
+import main.com.example.multimodule.dto.Equipo;
+import main.com.example.multimodule.dto.Jugador;
+
+import java.util.List;
+
+
+public interface JugadorFachada {
+
+	List<Jugador> obtenerTodos() ;
+	Jugador obtenerPorId(Long id) ;
+	void crear(Jugador jugador, Long torneoId) ;
+	void actualizar( Jugador jugadorNuevo);
+	void borrar(Long id);
+}

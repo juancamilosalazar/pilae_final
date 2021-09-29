@@ -1,8 +1,8 @@
 package com.example.multimodule.controlador;
 
-import com.example.multimodule.servicio.fachada.EquipoFachada;
+import com.example.multimodule.servicio.fachada.TorneoFachada;
 import com.example.multimodule.utilitario.Validadores;
-import main.com.example.multimodule.dto.Equipo;
+import main.com.example.multimodule.dto.Torneo;
 import main.com.example.multimodule.transversal.excepciones.PILAEExcepcion;
 import main.com.example.multimodule.transversal.mensajes.CodigosMensajes;
 import main.com.example.multimodule.transversal.respuesta.EstadoRespuestaEnum;
@@ -22,35 +22,35 @@ import static main.com.example.multimodule.transversal.mensajes.MensajesHelper.o
 public class TorneoControlador {
 
 	@Autowired
-	private EquipoFachada equipoFachada;
+	private TorneoFachada torneoFachada;
 
 	@Autowired
-	Validadores<Equipo> validadores = new Validadores<>();
+	Validadores<Torneo> validadores = new Validadores<>();
 
 
-	@PostMapping(params = {"torneoId"})
-	public ResponseEntity<Respuesta<Equipo>> crear(@RequestParam(value = "torneoId") final Long torneoId, @RequestBody final Equipo equipo) {
+	@PostMapping(params = {"deporteId"})
+	public ResponseEntity<Respuesta<Torneo>> crear(@RequestParam(value = "deporteId") final Long deporteId, @RequestBody final Torneo Torneo) {
 
-		ResponseEntity<Respuesta<Equipo>> respuestaSolicitud;
-		Respuesta<Equipo> respuesta = new Respuesta<>();
+		ResponseEntity<Respuesta<Torneo>> respuestaSolicitud;
+		Respuesta<Torneo> respuesta = new Respuesta<>();
 
 		boolean datosValidos = true;
 
 		try {
 
-			if (UtilObjeto.objetoEsNulo(equipo)) {
-				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_DATOS_VACIOS_CREAR_EQUIPO).getContenido();
-				//"Los datos del equipo no pueden estar vacíos!";
+			if (UtilObjeto.objetoEsNulo(Torneo)) {
+				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_ERROR_DATOS_VACIOS_CREAR_TORNEO).getContenido();
+				//"Los datos del Torneo no pueden estar vacíos!";
 				respuesta.agregarMensaje(mensajeUsuario);
 				datosValidos = false;
 			} else {
-				validadores.validarDatosNombre(equipo.getNombre(),respuesta,datosValidos);
-				validadores.validarDatosCodigo(equipo.getCodigo().toString(),respuesta,datosValidos);
+				validadores.validarDatosNombre(Torneo.getNombre(),respuesta,datosValidos);
+				validadores.validarDatosCodigo(Torneo.getCodigo().toString(),respuesta,datosValidos);
 			}
 
 			if (datosValidos) {
-				equipoFachada.crear(equipo,torneoId);
-				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_INFORMACION_CREAR_EQUIPO).getContenido();
+				torneoFachada.crear(Torneo,deporteId);
+				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_INFORMACION_CREAR_TORNEO).getContenido();
 				respuesta.agregarMensaje(mensajeUsuario);
 				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
 				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
@@ -63,8 +63,8 @@ public class TorneoControlador {
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
-			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_INESPERADO_CREAR_EQUIPO).getContenido();
-			//"error inesperado al crear el equipo";
+			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_ERROR_INESPERADO_CREAR_TORNEO).getContenido();
+			//"error inesperado al crear el Torneo";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -74,29 +74,29 @@ public class TorneoControlador {
 	}
 
 	@PutMapping(params = {"id"})
-	public ResponseEntity<Respuesta<Equipo>> actualizar(@RequestParam(value = "id") final Long id, @RequestBody final Equipo equipoNuevo) {
+	public ResponseEntity<Respuesta<Torneo>> actualizar(@RequestParam(value = "id") final Long id, @RequestBody final Torneo torneoNuevo) {
 
-		ResponseEntity<Respuesta<Equipo>> respuestaSolicitud;
-		Respuesta<Equipo> respuesta = new Respuesta<>();
+		ResponseEntity<Respuesta<Torneo>> respuestaSolicitud;
+		Respuesta<Torneo> respuesta = new Respuesta<>();
 		boolean datosValidos = true;
 
 		try {
 
-			if (UtilObjeto.objetoEsNulo(equipoNuevo)) {
-				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_DATOS_VACIOS_ACTUALIZAR_EQUIPO).getContenido();
-				//"Los datos del equipo no pueden estar vacíos!";
+			if (UtilObjeto.objetoEsNulo(torneoNuevo)) {
+				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_ERROR_DATOS_VACIOS_ACTUALIZAR_TORNEO).getContenido();
+				//"Los datos del Torneo no pueden estar vacíos!";
 				respuesta.agregarMensaje(mensajeUsuario);
 				datosValidos = false;
 			} else {
-				equipoNuevo.setCodigo(id);
-				validadores.validarDatosNombre(equipoNuevo.getNombre(),respuesta,datosValidos);
-				validadores.validarDatosCodigo(equipoNuevo.getCodigo().toString(),respuesta,datosValidos);
+				torneoNuevo.setCodigo(id);
+				validadores.validarDatosNombre(torneoNuevo.getNombre(),respuesta,datosValidos);
+				validadores.validarDatosCodigo(torneoNuevo.getCodigo().toString(),respuesta,datosValidos);
 			}
 
 			if (datosValidos) {
-				equipoFachada.actualizar(equipoNuevo);
-				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_INFORMACION_ACTUALIZAR_EQUIPO).getContenido();
-				//"La información del equipo se ha modificado exitosamente";
+				torneoFachada.actualizar(torneoNuevo);
+				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_INFORMACION_ACTUALIZAR_TORNEO).getContenido();
+				//"La información del Torneo se ha modificado exitosamente";
 				respuesta.agregarMensaje(mensajeUsuario);
 				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
 				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
@@ -109,8 +109,8 @@ public class TorneoControlador {
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
-			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_INESPERADO_ACTUALIZAR_EQUIPO).getContenido();
-			//"Se ha presentado un problema inesperado modificando la información del equipo";
+			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_ERROR_INESPERADO_ACTUALIZAR_TORNEO).getContenido();
+			//"Se ha presentado un problema inesperado modificando la información del Torneo";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -120,19 +120,19 @@ public class TorneoControlador {
 	}
 
 	@DeleteMapping(params = {"id"})
-	public ResponseEntity<Respuesta<Equipo>> eliminar(@RequestParam("id") final Long id) {
+	public ResponseEntity<Respuesta<Torneo>> eliminar(@RequestParam("id") final Long id) {
 
-		ResponseEntity<Respuesta<Equipo>> respuestaSolicitud;
-		Respuesta<Equipo> respuesta = new Respuesta<>();
+		ResponseEntity<Respuesta<Torneo>> respuestaSolicitud;
+		Respuesta<Torneo> respuesta = new Respuesta<>();
 		boolean datosValidos = true;
 
 		try {
 			validadores.validarDatosCodigo(id.toString(),respuesta,datosValidos);
 
 			if (datosValidos) {
-				equipoFachada.borrar(id);
-				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_INFORMACION_ELIMINAR_EQUIPO).getContenido();
-				//"La información del equipo se ha dado de baja exitosamente";
+				torneoFachada.borrar(id);
+				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_INFORMACION_ELIMINAR_TORNEO).getContenido();
+				//"La información del Torneo se ha dado de baja exitosamente";
 				respuesta.agregarMensaje(mensajeUsuario);
 				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
 				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
@@ -145,8 +145,8 @@ public class TorneoControlador {
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
-			String mensajeUsuario =obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_INESPERADO_ELIMINAR_EQUIPO).getContenido();
-			//"Se ha presentado un problema inesperado dadndo de baja la información del equipo";
+			String mensajeUsuario =obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_ERROR_INESPERADO_ELIMINAR_TORNEO).getContenido();
+			//"Se ha presentado un problema inesperado dadndo de baja la información del Torneo";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -156,10 +156,10 @@ public class TorneoControlador {
 	}
 
 	@GetMapping(params = {"id"})
-	public ResponseEntity<Respuesta<Equipo>> consultarPorCodigo(@RequestParam("id") final Long id) {
+	public ResponseEntity<Respuesta<Torneo>> consultarPorCodigo(@RequestParam("id") final Long id) {
 
-		ResponseEntity<Respuesta<Equipo>> respuestaSolicitud;
-		Respuesta<Equipo> respuesta = new Respuesta<>();
+		ResponseEntity<Respuesta<Torneo>> respuestaSolicitud;
+		Respuesta<Torneo> respuesta = new Respuesta<>();
 		boolean datosValidos = true;
 
 		try {
@@ -167,12 +167,12 @@ public class TorneoControlador {
 			validadores.validarDatosCodigo(id.toString(),respuesta,datosValidos);
 
 			if (datosValidos) {
-				List<Equipo> listaEquipos = new ArrayList<>();
-				listaEquipos.add(equipoFachada.obtenerPorId(id));
-				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_INFORMACION_OBTENER_EQUIPO).getContenido();
+				List<Torneo> listaTorneos = new ArrayList<>();
+				listaTorneos.add(torneoFachada.obtenerPorId(id));
+				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_INFORMACION_OBTENER_TORNEO).getContenido();
 				respuesta.agregarMensaje(mensajeUsuario);
 				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
-				respuesta.setResultado(listaEquipos);
+				respuesta.setResultado(listaTorneos);
 				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
 			} else {
 				respuesta.setEstado(EstadoRespuestaEnum.ERROR);
@@ -183,8 +183,8 @@ public class TorneoControlador {
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
-			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_INESPERADO_OBTENER_EQUIPO).getContenido();
-			//"Se ha presentado un problema inesperado consultando la información del equipo";
+			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_ERROR_INESPERADO_OBTENER_TORNEO).getContenido();
+			//"Se ha presentado un problema inesperado consultando la información del Torneo";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -194,24 +194,24 @@ public class TorneoControlador {
 	}
 
 	@GetMapping
-	public ResponseEntity<Respuesta<Equipo>> consultar() {
-		ResponseEntity<Respuesta<Equipo>> respuestaSolicitud;
-		Respuesta<Equipo> respuesta = new Respuesta<>();
+	public ResponseEntity<Respuesta<Torneo>> consultar() {
+		ResponseEntity<Respuesta<Torneo>> respuestaSolicitud;
+		Respuesta<Torneo> respuesta = new Respuesta<>();
 
 		try {
-			List<Equipo> listaEquipos = equipoFachada.obtenerTodos();
-			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_INFORMACION_OBTENER_EQUIPO).getContenido();
+			List<Torneo> listaTorneos = torneoFachada.obtenerTodos();
+			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_INFORMACION_OBTENER_TORNEO).getContenido();
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.EXITO);
-			respuesta.setResultado(listaEquipos);
+			respuesta.setResultado(listaTorneos);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
 		} catch (PILAEExcepcion excepcion) {
 			respuesta.agregarMensaje(excepcion.getTextoUsuario());
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
-			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_INESPERADO_OBTENER_EQUIPO).getContenido();
-			//"Se ha presentado un problema inesperado consultando la información de los equipos";
+			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_ERROR_INESPERADO_OBTENER_TORNEO).getContenido();
+			//"Se ha presentado un problema inesperado consultando la información de los Torneos";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);

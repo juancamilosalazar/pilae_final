@@ -30,7 +30,7 @@ public class DeporteControlador {
 	Validadores<Deporte> validadores = new Validadores<>();
 
 
-	@PostMapping(params = {"torneoId"})
+	@PostMapping
 	public ResponseEntity<Respuesta<Deporte>> crear(@RequestBody final Deporte deporte) {
 
 		ResponseEntity<Respuesta<Deporte>> respuestaSolicitud;
@@ -51,7 +51,7 @@ public class DeporteControlador {
 			}
 
 			if (datosValidos) {
-				deporteFachada.crear(deporte,torneoId);
+				deporteFachada.crear(deporte);
 				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosDeporteControlador.USUARIO_INFORMACION_CREAR_DEPORTE).getContenido();
 				respuesta.agregarMensaje(mensajeUsuario);
 				respuesta.setEstado(EstadoRespuestaEnum.EXITO);

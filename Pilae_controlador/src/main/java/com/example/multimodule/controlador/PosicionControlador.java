@@ -1,8 +1,8 @@
 package com.example.multimodule.controlador;
 
-import com.example.multimodule.servicio.fachada.EquipoFachada;
+import com.example.multimodule.servicio.fachada.PosicionFachada;
 import com.example.multimodule.utilitario.Validadores;
-import main.com.example.multimodule.dto.Equipo;
+import main.com.example.multimodule.dto.Posicion;
 import main.com.example.multimodule.transversal.excepciones.PILAEExcepcion;
 import main.com.example.multimodule.transversal.mensajes.CodigosMensajes;
 import main.com.example.multimodule.transversal.respuesta.EstadoRespuestaEnum;
@@ -22,35 +22,34 @@ import static main.com.example.multimodule.transversal.mensajes.MensajesHelper.o
 public class PosicionControlador {
 
 	@Autowired
-	private EquipoFachada equipoFachada;
+	private PosicionFachada posicionFachada;
 
 	@Autowired
-	Validadores<Equipo> validadores = new Validadores<>();
+	Validadores<Posicion> validadores = new Validadores<>();
 
 
 	@PostMapping(params = {"torneoId"})
-	public ResponseEntity<Respuesta<Equipo>> crear(@RequestParam(value = "torneoId") final Long torneoId, @RequestBody final Equipo equipo) {
+	public ResponseEntity<Respuesta<Posicion>> crear(@RequestParam(value = "torneoId") final Long torneoId, @RequestBody final Posicion Posicion) {
 
-		ResponseEntity<Respuesta<Equipo>> respuestaSolicitud;
-		Respuesta<Equipo> respuesta = new Respuesta<>();
+		ResponseEntity<Respuesta<Posicion>> respuestaSolicitud;
+		Respuesta<Posicion> respuesta = new Respuesta<>();
 
 		boolean datosValidos = true;
 
 		try {
 
-			if (UtilObjeto.objetoEsNulo(equipo)) {
-				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_DATOS_VACIOS_CREAR_EQUIPO).getContenido();
-				//"Los datos del equipo no pueden estar vacíos!";
+			if (UtilObjeto.objetoEsNulo(Posicion)) {
+				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPosicionControlador.USUARIO_ERROR_DATOS_VACIOS_CREAR_POSICION).getContenido();
+				//"Los datos del Posicion no pueden estar vacíos!";
 				respuesta.agregarMensaje(mensajeUsuario);
 				datosValidos = false;
 			} else {
-				validadores.validarDatosNombre(equipo.getNombre(),respuesta,datosValidos);
-				validadores.validarDatosCodigo(equipo.getCodigo().toString(),respuesta,datosValidos);
+				validadores.validarDatosCodigo(Posicion.getCodigo().toString(),respuesta,datosValidos);
 			}
 
 			if (datosValidos) {
-				equipoFachada.crear(equipo,torneoId);
-				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_INFORMACION_CREAR_EQUIPO).getContenido();
+				posicionFachada.crear(Posicion,torneoId);
+				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPosicionControlador.USUARIO_INFORMACION_CREAR_POSICION).getContenido();
 				respuesta.agregarMensaje(mensajeUsuario);
 				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
 				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
@@ -63,8 +62,8 @@ public class PosicionControlador {
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
-			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_INESPERADO_CREAR_EQUIPO).getContenido();
-			//"error inesperado al crear el equipo";
+			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPosicionControlador.USUARIO_ERROR_INESPERADO_CREAR_POSICION).getContenido();
+			//"error inesperado al crear el Posicion";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -73,93 +72,13 @@ public class PosicionControlador {
 		return respuestaSolicitud;
 	}
 
-	@PutMapping(params = {"id"})
-	public ResponseEntity<Respuesta<Equipo>> actualizar(@RequestParam(value = "id") final Long id, @RequestBody final Equipo equipoNuevo) {
 
-		ResponseEntity<Respuesta<Equipo>> respuestaSolicitud;
-		Respuesta<Equipo> respuesta = new Respuesta<>();
-		boolean datosValidos = true;
-
-		try {
-
-			if (UtilObjeto.objetoEsNulo(equipoNuevo)) {
-				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_DATOS_VACIOS_ACTUALIZAR_EQUIPO).getContenido();
-				//"Los datos del equipo no pueden estar vacíos!";
-				respuesta.agregarMensaje(mensajeUsuario);
-				datosValidos = false;
-			} else {
-				equipoNuevo.setCodigo(id);
-				validadores.validarDatosNombre(equipoNuevo.getNombre(),respuesta,datosValidos);
-				validadores.validarDatosCodigo(equipoNuevo.getCodigo().toString(),respuesta,datosValidos);
-			}
-
-			if (datosValidos) {
-				equipoFachada.actualizar(equipoNuevo);
-				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_INFORMACION_ACTUALIZAR_EQUIPO).getContenido();
-				//"La información del equipo se ha modificado exitosamente";
-				respuesta.agregarMensaje(mensajeUsuario);
-				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
-				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
-			} else {
-				respuesta.setEstado(EstadoRespuestaEnum.ERROR);
-				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-			}
-		} catch (PILAEExcepcion excepcion) {
-			respuesta.agregarMensaje(excepcion.getTextoUsuario());
-			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
-			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-		} catch (Exception excepcion) {
-			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_INESPERADO_ACTUALIZAR_EQUIPO).getContenido();
-			//"Se ha presentado un problema inesperado modificando la información del equipo";
-			respuesta.agregarMensaje(mensajeUsuario);
-			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
-			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-		}
-
-		return respuestaSolicitud;
-	}
-
-	@DeleteMapping(params = {"id"})
-	public ResponseEntity<Respuesta<Equipo>> eliminar(@RequestParam("id") final Long id) {
-
-		ResponseEntity<Respuesta<Equipo>> respuestaSolicitud;
-		Respuesta<Equipo> respuesta = new Respuesta<>();
-		boolean datosValidos = true;
-
-		try {
-			validadores.validarDatosCodigo(id.toString(),respuesta,datosValidos);
-
-			if (datosValidos) {
-				equipoFachada.borrar(id);
-				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_INFORMACION_ELIMINAR_EQUIPO).getContenido();
-				//"La información del equipo se ha dado de baja exitosamente";
-				respuesta.agregarMensaje(mensajeUsuario);
-				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
-				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
-			} else {
-				respuesta.setEstado(EstadoRespuestaEnum.ERROR);
-				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-			}
-		} catch (PILAEExcepcion excepcion) {
-			respuesta.agregarMensaje(excepcion.getTextoUsuario());
-			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
-			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-		} catch (Exception excepcion) {
-			String mensajeUsuario =obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_INESPERADO_ELIMINAR_EQUIPO).getContenido();
-			//"Se ha presentado un problema inesperado dadndo de baja la información del equipo";
-			respuesta.agregarMensaje(mensajeUsuario);
-			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
-			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-		}
-
-		return respuestaSolicitud;
-	}
 
 	@GetMapping(params = {"id"})
-	public ResponseEntity<Respuesta<Equipo>> consultarPorCodigo(@RequestParam("id") final Long id) {
+	public ResponseEntity<Respuesta<Posicion>> consultarPorCodigo(@RequestParam("id") final Long id) {
 
-		ResponseEntity<Respuesta<Equipo>> respuestaSolicitud;
-		Respuesta<Equipo> respuesta = new Respuesta<>();
+		ResponseEntity<Respuesta<Posicion>> respuestaSolicitud;
+		Respuesta<Posicion> respuesta = new Respuesta<>();
 		boolean datosValidos = true;
 
 		try {
@@ -167,12 +86,12 @@ public class PosicionControlador {
 			validadores.validarDatosCodigo(id.toString(),respuesta,datosValidos);
 
 			if (datosValidos) {
-				List<Equipo> listaEquipos = new ArrayList<>();
-				listaEquipos.add(equipoFachada.obtenerPorId(id));
-				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_INFORMACION_OBTENER_EQUIPO).getContenido();
+				List<Posicion> listaPosicions = new ArrayList<>();
+				listaPosicions.add(posicionFachada.obtenerPorId(id));
+				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPosicionControlador.USUARIO_INFORMACION_OBTENER_POSICION).getContenido();
 				respuesta.agregarMensaje(mensajeUsuario);
 				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
-				respuesta.setResultado(listaEquipos);
+				respuesta.setResultado(listaPosicions);
 				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
 			} else {
 				respuesta.setEstado(EstadoRespuestaEnum.ERROR);
@@ -183,35 +102,8 @@ public class PosicionControlador {
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
-			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_INESPERADO_OBTENER_EQUIPO).getContenido();
-			//"Se ha presentado un problema inesperado consultando la información del equipo";
-			respuesta.agregarMensaje(mensajeUsuario);
-			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
-			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-		}
-
-		return respuestaSolicitud;
-	}
-
-	@GetMapping
-	public ResponseEntity<Respuesta<Equipo>> consultar() {
-		ResponseEntity<Respuesta<Equipo>> respuestaSolicitud;
-		Respuesta<Equipo> respuesta = new Respuesta<>();
-
-		try {
-			List<Equipo> listaEquipos = equipoFachada.obtenerTodos();
-			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_INFORMACION_OBTENER_EQUIPO).getContenido();
-			respuesta.agregarMensaje(mensajeUsuario);
-			respuesta.setEstado(EstadoRespuestaEnum.EXITO);
-			respuesta.setResultado(listaEquipos);
-			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
-		} catch (PILAEExcepcion excepcion) {
-			respuesta.agregarMensaje(excepcion.getTextoUsuario());
-			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
-			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-		} catch (Exception excepcion) {
-			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_INESPERADO_OBTENER_EQUIPO).getContenido();
-			//"Se ha presentado un problema inesperado consultando la información de los equipos";
+			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPosicionControlador.USUARIO_ERROR_INESPERADO_OBTENER_POSICION).getContenido();
+			//"Se ha presentado un problema inesperado consultando la información del Posicion";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
