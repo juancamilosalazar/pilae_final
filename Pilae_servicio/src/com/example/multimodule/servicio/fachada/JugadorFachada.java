@@ -10,7 +10,7 @@ public interface JugadorFachada {
 
 	List<Jugador> obtenerTodos() ;
 	Jugador obtenerPorId(Long id) ;
-	void crear(Jugador jugador, Long torneoId) ;
+	void crear(Jugador jugador, Long equipoId) ;
 	void actualizar( Jugador jugadorNuevo);
 	void borrar(Long id);
 }

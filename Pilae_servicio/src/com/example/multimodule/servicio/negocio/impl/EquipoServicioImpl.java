@@ -1,6 +1,8 @@
 package com.example.multimodule.servicio.negocio.impl;
 
+import com.example.multimodule.entidad.PosicionEntidad;
 import com.example.multimodule.infraestructura.equipo.EquipoRepositorioJpa;
+import com.example.multimodule.infraestructura.posicion.PosicionRepositorioJpa;
 import com.example.multimodule.infraestructura.torneo.TorneoRepositorioJpa;
 import com.example.multimodule.servicio.negocio.EquipoServicio;
 import main.com.example.multimodule.dominio.EquipoDominio;
@@ -25,13 +27,15 @@ public class EquipoServicioImpl  implements EquipoServicio {
 
     private EquipoRepositorioJpa equipoRepositorio;
     private TorneoRepositorioJpa torneoRepositorio;
+    private PosicionRepositorioJpa posicionRepositorioJpa;
 
 
 
     @Autowired
-    public EquipoServicioImpl(EquipoRepositorioJpa equipoRepositorio, TorneoRepositorioJpa torneoRepositorio) {
+    public EquipoServicioImpl(EquipoRepositorioJpa equipoRepositorio, TorneoRepositorioJpa torneoRepositorio, PosicionRepositorioJpa posicionRepositorioJpa) {
         this.equipoRepositorio = equipoRepositorio;
         this.torneoRepositorio = torneoRepositorio;
+        this.posicionRepositorioJpa = posicionRepositorioJpa;
     }
 
     @Override
@@ -88,6 +92,7 @@ public class EquipoServicioImpl  implements EquipoServicio {
 
         ObtenerTorneoDelPartido(torneoId,equipoDominio);
         EquipoEntidad equipoEntidad = EquipoEnsambladorEntidad.obtenerEquipoEnsambladorEntidad().ensamblarEntidad(equipoDominio);
+        crearTablaDePosiciones(equipoEntidad);
         equipoRepositorio.save(equipoEntidad);
     }
 
@@ -148,6 +153,20 @@ public class EquipoServicioImpl  implements EquipoServicio {
         });
         TorneoDominio torneoDominio = TorneoConvertorUtilitario.convertirTorneoEntidadEnTorneoDominio(torneo);
         equipo.setTorneo(torneoDominio);
+    }
+    public void crearTablaDePosiciones(EquipoEntidad equipoEntidad) {
+        PosicionEntidad posicionEntidad = new PosicionEntidad();
+        posicionEntidad.setPuntos(0);
+        posicionEntidad.setPartidosEmpatados(0);
+        posicionEntidad.setPartidosPerdidos(0);
+        posicionEntidad.setPartidosGanados(0);
+        posicionEntidad.setPartidosJugados(0);
+        posicionEntidad.setGolesDiferencia(0);
+        posicionEntidad.setGolesFavor(0);
+        posicionEntidad.setGolesContra(0);
+        posicionEntidad.setFkTorneo(equipoEntidad.getTorneo());
+        posicionEntidad.setFkEquipo(equipoEntidad);
+        posicionRepositorioJpa.save(posicionEntidad);
     }
 
 }

@@ -28,51 +28,6 @@ public class PosicionControlador {
 	Validadores<Posicion> validadores = new Validadores<>();
 
 
-	@PostMapping(params = {"torneoId"})
-	public ResponseEntity<Respuesta<Posicion>> crear(@RequestParam(value = "torneoId") final Long torneoId, @RequestBody final Posicion Posicion) {
-
-		ResponseEntity<Respuesta<Posicion>> respuestaSolicitud;
-		Respuesta<Posicion> respuesta = new Respuesta<>();
-
-		boolean datosValidos = true;
-
-		try {
-
-			if (UtilObjeto.objetoEsNulo(Posicion)) {
-				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPosicionControlador.USUARIO_ERROR_DATOS_VACIOS_CREAR_POSICION).getContenido();
-				//"Los datos del Posicion no pueden estar vacíos!";
-				respuesta.agregarMensaje(mensajeUsuario);
-				datosValidos = false;
-			} else {
-				validadores.validarDatosCodigo(Posicion.getCodigo().toString(),respuesta,datosValidos);
-			}
-
-			if (datosValidos) {
-				posicionFachada.crear(Posicion,torneoId);
-				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPosicionControlador.USUARIO_INFORMACION_CREAR_POSICION).getContenido();
-				respuesta.agregarMensaje(mensajeUsuario);
-				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
-				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
-			} else {
-				respuesta.setEstado(EstadoRespuestaEnum.ERROR);
-				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-			}
-		} catch (PILAEExcepcion excepcion) {
-			respuesta.agregarMensaje(excepcion.getTextoUsuario());
-			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
-			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-		} catch (Exception excepcion) {
-			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPosicionControlador.USUARIO_ERROR_INESPERADO_CREAR_POSICION).getContenido();
-			//"error inesperado al crear el Posicion";
-			respuesta.agregarMensaje(mensajeUsuario);
-			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
-			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
-		}
-
-		return respuestaSolicitud;
-	}
-
-
 
 	@GetMapping(params = {"id"})
 	public ResponseEntity<Respuesta<Posicion>> consultarPorCodigo(@RequestParam("id") final Long id) {

@@ -35,17 +35,6 @@ public class PosicionFachadaImplementacion implements PosicionFachada {
         return PosicionEnsamblador.obtenerPosicionEnsambladorDTO().ensamblarDTO(dominio);
     }
 
-    @Override
-    public void crear(Posicion dto, Long id) {
-        if (UtilObjeto.objetoEsNulo(dto)) {
-            String mensajeUsuario = "Posicion no puede ser nulo";
-            String mensajeTecnico = "eqyuipo nulo";
-            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
-        }
-
-        PosicionDominio dominio = PosicionEnsamblador.obtenerPosicionEnsambladorDTO().ensamblarDominio(dto);
-        servicio.crear(dominio,id);
-    }
 
 
 
