@@ -20,7 +20,7 @@ import java.util.List;
 import static main.com.example.multimodule.transversal.mensajes.MensajesHelper.obtenerMensaje;
 
 @RestController
-@RequestMapping(path = "partido", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "partido")
 public class PartidoControlador {
 
 	@Autowired
@@ -112,7 +112,6 @@ public class PartidoControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPartidoControlador.USUARIO_ERROR_INESPERADO_ACTUALIZAR_PARTIDO).getContenido();
-			//"Se ha presentado un problema inesperado modificando la información del Partido";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -134,7 +133,6 @@ public class PartidoControlador {
 			if (datosValidos) {
 				partidoFachada.borrar(id);
 				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPartidoControlador.USUARIO_INFORMACION_ELIMINAR_PARTIDO).getContenido();
-				//"La información del Partido se ha dado de baja exitosamente";
 				respuesta.agregarMensaje(mensajeUsuario);
 				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
 				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
@@ -157,7 +155,7 @@ public class PartidoControlador {
 		return respuestaSolicitud;
 	}
 
-	@GetMapping(params = {"id"})
+	@GetMapping(params = {"idTorneo"})
 	public ResponseEntity<Respuesta<Partido>> consultarPorTorneo(@RequestParam("idTorneo") final Long idTorneo) {
 
 		ResponseEntity<Respuesta<Partido>> respuestaSolicitud;
@@ -185,7 +183,6 @@ public class PartidoControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPartidoControlador.USUARIO_ERROR_INESPERADO_OBTENER_PARTIDO).getContenido();
-			//"Se ha presentado un problema inesperado consultando la información del Partido";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -195,7 +192,7 @@ public class PartidoControlador {
 	}
 
 
-	@PostMapping(params = {"torneoId"})
+	@PostMapping(params = {"idPartido"})
 	public ResponseEntity<Respuesta<Partido>> jugarPartido(@RequestParam(value = "idPartido") final Long idPartido,  @RequestBody final Marcador marcador) {
 
 		ResponseEntity<Respuesta<Partido>> respuestaSolicitud;
@@ -207,11 +204,10 @@ public class PartidoControlador {
 
 			if (UtilObjeto.objetoEsNulo(marcador)) {
 				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPartidoControlador.USUARIO_ERROR_DATOS_VACIOS_JUGAR_PARTIDO).getContenido();
-				//"Los datos del marcador no pueden estar vacíos!";
+
 				respuesta.agregarMensaje(mensajeUsuario);
 				datosValidos = false;
 			} else {
-				//validadores.validarDatosNombre(marcador.get(),respuesta,datosValidos);
 				validadores.validarDatosCodigo(marcador.getCodigo().toString(),respuesta,datosValidos);
 			}
 
@@ -231,7 +227,6 @@ public class PartidoControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPartidoControlador.USUARIO_ERROR_INESPERADO_CREAR_PARTIDO).getContenido();
-			//"error inesperado al crear el marcador";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -241,8 +236,8 @@ public class PartidoControlador {
 	}
 
 
-	@GetMapping(params = {"idTorneo"})
-	public ResponseEntity<Respuesta<Partido>> crearFixtureIdaYvuelta(@RequestParam(value = "idTorneo") final Long idTorneo) {
+	@GetMapping(params = {"idTorneoIdaVuelta"})
+	public ResponseEntity<Respuesta<Partido>> crearFixtureIdaYvuelta(@RequestParam(value = "idTorneoIdaVuelta") final Long idTorneo) {
 		ResponseEntity<Respuesta<Partido>> respuestaSolicitud;
 		Respuesta<Partido> respuesta = new Respuesta<>();
 		boolean datosValidos = true;
@@ -265,7 +260,6 @@ public class PartidoControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPartidoControlador.USUARIO_ERROR_INESPERADO_CREAR_FIXTURE_PARTIDO).getContenido();
-			//"Se ha presentado un problema inesperado consultando la información del Partido";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -300,7 +294,6 @@ public class PartidoControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPartidoControlador.USUARIO_ERROR_INESPERADO_CREAR_FIXTURE_PARTIDO).getContenido();
-			//"Se ha presentado un problema inesperado consultando la información del Partido";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);

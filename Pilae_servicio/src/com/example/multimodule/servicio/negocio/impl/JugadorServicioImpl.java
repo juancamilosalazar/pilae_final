@@ -74,7 +74,7 @@ public class JugadorServicioImpl implements JugadorServicio {
             throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
         }
 
-        JugadorDominio resultadosConsulta = obtenerPorId(dominio.getId());
+        JugadorDominio resultadosConsulta = obtenerPorId(dominio.getCodigo());
 
         if (!UtilObjeto.objetoEsNulo(resultadosConsulta)) {
             String mensajeUsuario = "Jugador con el código existente";
@@ -95,7 +95,7 @@ public class JugadorServicioImpl implements JugadorServicio {
             throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
         }
 
-        JugadorDominio resultadosConsulta = obtenerPorId(nuevo.getId());
+        JugadorDominio resultadosConsulta = obtenerPorId(nuevo.getCodigo());
 
         if (UtilObjeto.objetoEsNulo(resultadosConsulta)) {
             String mensajeUsuario = "Jugador no existe";

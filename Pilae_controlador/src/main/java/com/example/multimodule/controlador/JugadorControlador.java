@@ -29,7 +29,7 @@ public class JugadorControlador {
 	Validadores<Jugador> validadores = new Validadores<>();
 
 
-	@PostMapping(params = {"torneoId"})
+	@PostMapping(params = {"equipoId"})
 	public ResponseEntity<Respuesta<Jugador>> crear(@RequestParam(value = "equipoId") final Long equipoId, @RequestBody final Jugador jugador) {
 
 		ResponseEntity<Respuesta<Jugador>> respuestaSolicitud;
@@ -41,7 +41,6 @@ public class JugadorControlador {
 
 			if (UtilObjeto.objetoEsNulo(jugador)) {
 				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosJugadorControlador.USUARIO_ERROR_DATOS_VACIOS_CREAR_JUGADOR).getContenido();
-				//"Los datos del jugador no pueden estar vacíos!";
 				respuesta.agregarMensaje(mensajeUsuario);
 				datosValidos = false;
 			} else {
@@ -65,7 +64,6 @@ public class JugadorControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosJugadorControlador.USUARIO_ERROR_INESPERADO_CREAR_JUGADOR).getContenido();
-			//"error inesperado al crear el jugador";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -85,7 +83,6 @@ public class JugadorControlador {
 
 			if (UtilObjeto.objetoEsNulo(jugadorNuevo)) {
 				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosJugadorControlador.USUARIO_ERROR_DATOS_VACIOS_ACTUALIZAR_JUGADOR).getContenido();
-				//"Los datos del Jugador no pueden estar vacíos!";
 				respuesta.agregarMensaje(mensajeUsuario);
 				datosValidos = false;
 			} else {
@@ -111,7 +108,6 @@ public class JugadorControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosJugadorControlador.USUARIO_ERROR_INESPERADO_ACTUALIZAR_JUGADOR).getContenido();
-			//"Se ha presentado un problema inesperado modificando la información del Jugador";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -133,7 +129,6 @@ public class JugadorControlador {
 			if (datosValidos) {
 				jugadorFachada.borrar(id);
 				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosJugadorControlador.USUARIO_INFORMACION_ELIMINAR_JUGADOR).getContenido();
-				//"La información del Jugador se ha dado de baja exitosamente";
 				respuesta.agregarMensaje(mensajeUsuario);
 				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
 				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
@@ -147,7 +142,6 @@ public class JugadorControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario =obtenerMensaje(CodigosMensajes.CodigosJugadorControlador.USUARIO_ERROR_INESPERADO_ELIMINAR_JUGADOR).getContenido();
-			//"Se ha presentado un problema inesperado dadndo de baja la información del Jugador";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -185,7 +179,6 @@ public class JugadorControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosJugadorControlador.USUARIO_ERROR_INESPERADO_OBTENER_JUGADOR).getContenido();
-			//"Se ha presentado un problema inesperado consultando la información del Jugador";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -212,7 +205,6 @@ public class JugadorControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosJugadorControlador.USUARIO_ERROR_INESPERADO_OBTENER_JUGADOR).getContenido();
-			//"Se ha presentado un problema inesperado consultando la información de los Jugadors";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);

@@ -14,7 +14,7 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "partido_tbl")
+@Table(name = "partido")
 public class PartidoEntidad implements Serializable {
     @Id
     @Column(name = "id_partido", nullable = false)

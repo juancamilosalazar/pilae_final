@@ -1,13 +1,12 @@
 package com.example.multimodule.servicio.negocio.impl;
 
-import com.example.multimodule.entidad.EquipoEntidad;
-import com.example.multimodule.entidad.PartidoEntidad;
-import com.example.multimodule.entidad.PosicionEntidad;
-import com.example.multimodule.entidad.TorneoEntidad;
+import com.example.multimodule.entidad.*;
 import com.example.multimodule.infraestructura.equipo.EquipoRepositorioJpa;
+import com.example.multimodule.infraestructura.marcador.MarcadorRepositorioJpa;
 import com.example.multimodule.infraestructura.partido.PartidoRepositorioJpa;
 import com.example.multimodule.infraestructura.posicion.PosicionRepositorioJpa;
 import com.example.multimodule.infraestructura.torneo.TorneoRepositorioJpa;
+import com.example.multimodule.servicio.ensamblador.entidad.implementacion.MarcadorEnsambladorEntidad;
 import com.example.multimodule.servicio.ensamblador.entidad.implementacion.PartidoEnsambladorEntidad;
 import com.example.multimodule.servicio.negocio.PartidoServicio;
 import com.example.multimodule.servicio.negocio.impl.utilitario.GeneracionFixtureIdaYVuelta;
@@ -34,16 +33,18 @@ public class PartidoServicioImpl implements PartidoServicio {
     private EquipoRepositorioJpa equipoRepositorioJpa;
     private TorneoRepositorioJpa torneoRepositorioJpa;
     private PosicionRepositorioJpa posicionRepositorio;
+    private MarcadorRepositorioJpa marcadorRepositorio;
     private GeneracionFixtureIdaYVuelta generacionFixtureIdaYVuelta;
     private GeneracionFixtureSoloIda generacionFixtureSoloIda;
 
 
     @Autowired
-    public PartidoServicioImpl(PartidoRepositorioJpa repositorio, EquipoRepositorioJpa equipoRepositorioJpa, TorneoRepositorioJpa torneoRepositorioJpa, PosicionRepositorioJpa posicionRepositorio, GeneracionFixtureIdaYVuelta generacionFixtureIdaYVuelta, GeneracionFixtureSoloIda generacionFixtureSoloIda) {
+    public PartidoServicioImpl(PartidoRepositorioJpa repositorio, EquipoRepositorioJpa equipoRepositorioJpa, TorneoRepositorioJpa torneoRepositorioJpa, PosicionRepositorioJpa posicionRepositorio, MarcadorRepositorioJpa marcadorRepositorio, GeneracionFixtureIdaYVuelta generacionFixtureIdaYVuelta, GeneracionFixtureSoloIda generacionFixtureSoloIda) {
         this.repositorio = repositorio;
         this.equipoRepositorioJpa = equipoRepositorioJpa;
         this.torneoRepositorioJpa = torneoRepositorioJpa;
         this.posicionRepositorio = posicionRepositorio;
+        this.marcadorRepositorio = marcadorRepositorio;
         this.generacionFixtureIdaYVuelta = generacionFixtureIdaYVuelta;
         this.generacionFixtureSoloIda = generacionFixtureSoloIda;
     }
@@ -162,7 +163,11 @@ public class PartidoServicioImpl implements PartidoServicio {
             String mensajeTecnico = "Partido no existe";
             throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
         }
+
         cambiarValoresAPartidoJugado(resultadosConsulta);
+        marcadorDominio.setFkPartido(resultadosConsulta);
+        MarcadorEntidad marcadorEntidad = MarcadorEnsambladorEntidad.obtenerMarcadorEnsambladorEntidad().ensamblarEntidad(marcadorDominio);
+        marcadorRepositorio.save(marcadorEntidad);
         PartidoEntidad entidad = PartidoEnsambladorEntidad.obtenerPartidoEnsambladorEntidad().ensamblarEntidad(resultadosConsulta);
         actualizarTablaDePosiciones(entidad,marcadorDominio.getEquipoLocalMrc(),marcadorDominio.getEquipoVisitanteMrc());
         repositorio.save(entidad);
@@ -262,8 +267,8 @@ public class PartidoServicioImpl implements PartidoServicio {
     }
 
     private void actualizarTablaDePosiciones(PartidoEntidad partido, int marcadorEquipoLocal, int marcadorEquipoVisitante) {
-        PosicionEntidad posicionEntidadLocal = posicionRepositorio.findByFkEquipo(partido.getFkEquipoLocal());
-        PosicionEntidad posicionEntidadVisitante = posicionRepositorio.findByFkEquipo(partido.getFkEquipoVisitante());
+        PosicionEntidad posicionEntidadLocal = posicionRepositorio.findByfkEquipo(partido.getFkEquipoLocal());
+        PosicionEntidad posicionEntidadVisitante = posicionRepositorio.findByfkEquipo(partido.getFkEquipoVisitante());
         posicionEntidadLocal.setFkEquipo(partido.getFkEquipoLocal());
         posicionEntidadLocal.setGolesContra(posicionEntidadLocal.getGolesContra() + marcadorEquipoVisitante);
         posicionEntidadLocal.setGolesFavor(posicionEntidadLocal.getGolesFavor() + marcadorEquipoLocal);

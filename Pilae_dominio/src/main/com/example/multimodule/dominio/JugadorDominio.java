@@ -2,27 +2,30 @@ package main.com.example.multimodule.dominio;
 
 
 public class JugadorDominio {
-    private Long id;
+    private Long codigo;
     private String nombre;
     //@EqualsAndHashCode.Include
     private String identificacion;
     private Long fechaNacimiento;
     private EquipoDominio fkEquipo;
 
-    public JugadorDominio(Long id, String nombre, String identificacion, Long fechaNacimiento, EquipoDominio fkEquipo) {
-        this.id = id;
+    public JugadorDominio(Long codigo, String nombre, String identificacion, Long fechaNacimiento, EquipoDominio fkEquipo) {
+        this.codigo = codigo;
         this.nombre = nombre;
         this.identificacion = identificacion;
         this.fechaNacimiento = fechaNacimiento;
         this.fkEquipo = fkEquipo;
     }
 
-    public Long getId() {
-        return id;
+    public JugadorDominio() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public Long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
     }
 
     public String getNombre() {

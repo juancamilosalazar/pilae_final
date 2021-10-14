@@ -14,6 +14,9 @@ public class PosicionDominio {
     private EquipoDominio fkEquipo;
     private TorneoDominio fkTorneo;
 
+    public PosicionDominio() {
+    }
+
     public PosicionDominio(Long codigo, int partidosJugados, int partidosGanados, int partidosPerdidos, int partidosEmpatados, int golesFavor, int golesContra, int golesDiferencia, int puntos, EquipoDominio fkEquipo, TorneoDominio fkTorneo) {
         this.codigo = codigo;
         this.partidosJugados = partidosJugados;

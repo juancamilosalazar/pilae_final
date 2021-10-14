@@ -13,7 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "marcador_tbl")
+@Table(name = "marcador")
 public class MarcadorEntidad implements Serializable {
     @Id
     @Column(name = "id_marcador", nullable = false)

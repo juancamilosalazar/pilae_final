@@ -20,6 +20,7 @@ import static main.com.example.multimodule.transversal.mensajes.MensajesHelper.o
 
 @RestController
 @RequestMapping(path = "deporte")
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE, RequestMethod.PUT})
 public class DeporteControlador {
 
 	@Autowired

@@ -5,6 +5,14 @@ public class DeporteDominio implements java.io.Serializable{
     private Long codigo;
     private String nombre;
 
+    public DeporteDominio(Long codigo, String nombre) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+    }
+
+    public DeporteDominio() {
+    }
+
     public Long getCodigo() {
         return codigo;
     }

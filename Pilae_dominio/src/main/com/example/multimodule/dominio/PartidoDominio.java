@@ -22,6 +22,9 @@ public class PartidoDominio {
         this.fkTorneo = fkTorneo;
     }
 
+    public PartidoDominio() {
+    }
+
     public Long getCodigo() {
         return codigo;
     }

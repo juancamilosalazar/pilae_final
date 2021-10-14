@@ -22,7 +22,7 @@ import java.util.List;
 import static main.com.example.multimodule.transversal.mensajes.MensajesHelper.obtenerMensaje;
 
 @RestController
-@RequestMapping(path = "posicion", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "posicion")
 public class PosicionControlador {
 
 	@Autowired
@@ -62,7 +62,6 @@ public class PosicionControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPosicionControlador.USUARIO_ERROR_INESPERADO_OBTENER_POSICION).getContenido();
-			//"Se ha presentado un problema inesperado consultando la información del Posicion";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);

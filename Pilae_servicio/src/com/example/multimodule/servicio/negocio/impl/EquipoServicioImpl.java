@@ -6,8 +6,10 @@ import com.example.multimodule.entidad.TorneoEntidad;
 import com.example.multimodule.infraestructura.equipo.EquipoRepositorioJpa;
 import com.example.multimodule.infraestructura.posicion.PosicionRepositorioJpa;
 import com.example.multimodule.infraestructura.torneo.TorneoRepositorioJpa;
+import com.example.multimodule.servicio.ensamblador.dto.implementacion.TorneoEnsamblador;
 import com.example.multimodule.servicio.ensamblador.entidad.implementacion.EquipoEnsambladorEntidad;
 import com.example.multimodule.servicio.negocio.EquipoServicio;
+import com.example.multimodule.servicio.utilitario.EquipoConvertorUtilitario;
 import com.example.multimodule.servicio.utilitario.TorneoConvertorUtilitario;
 import main.com.example.multimodule.dominio.EquipoDominio;
 import main.com.example.multimodule.dominio.TorneoDominio;
@@ -19,6 +21,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
 
 
 @Service
@@ -81,9 +85,8 @@ public class EquipoServicioImpl  implements EquipoServicio {
             throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
         }
 
-        EquipoDominio resultadosConsulta = obtenerPorId(equipoDominio.getCodigo());
-
-        if (!UtilObjeto.objetoEsNulo(resultadosConsulta)) {
+        Optional<EquipoEntidad> resultadosConsulta = equipoRepositorio.findById(equipoDominio.getCodigo());
+        if (resultadosConsulta.isPresent()) {
             String mensajeUsuario = "equipo con el codigo existente";
             String mensajeTecnico = "equipo con el codigo existente";
             throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
@@ -91,8 +94,8 @@ public class EquipoServicioImpl  implements EquipoServicio {
 
         ObtenerTorneoDelPartido(torneoId,equipoDominio);
         EquipoEntidad equipoEntidad = EquipoEnsambladorEntidad.obtenerEquipoEnsambladorEntidad().ensamblarEntidad(equipoDominio);
-        crearTablaDePosiciones(equipoEntidad);
         equipoRepositorio.save(equipoEntidad);
+        crearTablaDePosiciones(equipoDominio);
     }
 
     @Override
@@ -153,8 +156,9 @@ public class EquipoServicioImpl  implements EquipoServicio {
         TorneoDominio torneoDominio = TorneoConvertorUtilitario.convertirTorneoEntidadEnTorneoDominio(torneo);
         equipo.setTorneo(torneoDominio);
     }
-    public void crearTablaDePosiciones(EquipoEntidad equipoEntidad) {
+    public void crearTablaDePosiciones(EquipoDominio equipoDominio) {
         PosicionEntidad posicionEntidad = new PosicionEntidad();
+        posicionEntidad.setCodigo(equipoDominio.getCodigo());
         posicionEntidad.setPuntos(0);
         posicionEntidad.setPartidosEmpatados(0);
         posicionEntidad.setPartidosPerdidos(0);
@@ -163,8 +167,8 @@ public class EquipoServicioImpl  implements EquipoServicio {
         posicionEntidad.setGolesDiferencia(0);
         posicionEntidad.setGolesFavor(0);
         posicionEntidad.setGolesContra(0);
-        posicionEntidad.setFkTorneo(equipoEntidad.getTorneo());
-        posicionEntidad.setFkEquipo(equipoEntidad);
+        posicionEntidad.setFkTorneo(TorneoConvertorUtilitario.convertirTorneoDominioEnTorneoEntidad(equipoDominio.getTorneo()));
+        posicionEntidad.setFkEquipo(EquipoConvertorUtilitario.convertirEquipoDominioEnEquipoEntidad(equipoDominio));
         posicionRepositorioJpa.save(posicionEntidad);
     }
 

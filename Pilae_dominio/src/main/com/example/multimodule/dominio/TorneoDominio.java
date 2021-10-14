@@ -6,6 +6,16 @@ public class TorneoDominio implements java.io.Serializable{
     private String descripcion;
     private DeporteDominio deporte;
 
+    public TorneoDominio(Long codigo, String nombre, String descripcion, DeporteDominio deporte) {
+        this.codigo = codigo;
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.deporte = deporte;
+    }
+
+    public TorneoDominio() {
+    }
+
     public Long getCodigo() {
         return codigo;
     }

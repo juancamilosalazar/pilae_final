@@ -21,7 +21,7 @@ import java.util.List;
 import static main.com.example.multimodule.transversal.mensajes.MensajesHelper.obtenerMensaje;
 
 @RestController
-@RequestMapping(path = "marcador", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "marcador")
 public class MarcadorControlador {
 
 	@Autowired
@@ -34,7 +34,7 @@ public class MarcadorControlador {
 
 
 	@GetMapping(params = {"idPartido"})
-	public ResponseEntity<Respuesta<Marcador>> consultarPorPartido(@RequestParam("id") final Long id) {
+	public ResponseEntity<Respuesta<Marcador>> consultarPorPartido(@RequestParam("idPartido") final Long id) {
 
 		ResponseEntity<Respuesta<Marcador>> respuestaSolicitud;
 		Respuesta<Marcador> respuesta = new Respuesta<>();
@@ -61,7 +61,6 @@ public class MarcadorControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosMarcadorControlador.USUARIO_ERROR_INESPERADO_OBTENER_MARCADOR).getContenido();
-			//"Se ha presentado un problema inesperado consultando la información del Marcador";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -71,7 +70,7 @@ public class MarcadorControlador {
 	}
 
 	@GetMapping(params = {"idTorneo"})
-	public ResponseEntity<Respuesta<Marcador>> consultarPorTorneo(@RequestParam("id") final Long id) {
+	public ResponseEntity<Respuesta<Marcador>> consultarPorTorneo(@RequestParam("idTorneo") final Long id) {
 
 		ResponseEntity<Respuesta<Marcador>> respuestaSolicitud;
 		Respuesta<Marcador> respuesta = new Respuesta<>();
@@ -98,7 +97,6 @@ public class MarcadorControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosMarcadorControlador.USUARIO_ERROR_INESPERADO_OBTENER_MARCADOR).getContenido();
-			//"Se ha presentado un problema inesperado consultando la información del Marcador";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);

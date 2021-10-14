@@ -15,6 +15,9 @@ public class MarcadorDominio {
         this.fkPartido = fkPartido;
     }
 
+    public MarcadorDominio() {
+    }
+
     public Long getCodigo() {
         return codigo;
     }

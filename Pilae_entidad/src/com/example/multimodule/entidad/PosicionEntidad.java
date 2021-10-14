@@ -13,7 +13,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "tabla_posiciones_tbl")
+@Table(name = "posiciones")
 public class PosicionEntidad implements Serializable {
     @Id
     @Column(name = "id_posiciones")
@@ -37,10 +37,10 @@ public class PosicionEntidad implements Serializable {
     private int puntos;
 
     @JoinColumn(name = "id_equipo", nullable = false)
-    @OneToOne(optional = false, cascade = CascadeType.PERSIST)
+    @OneToOne(optional = false, cascade = CascadeType.MERGE)
     private EquipoEntidad fkEquipo;
 
     @JoinColumn(name = "id_torneo", nullable = false)
-    @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
+    @ManyToOne(optional = false, cascade = CascadeType.MERGE)
     private TorneoEntidad fkTorneo;
 }

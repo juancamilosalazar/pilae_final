@@ -14,12 +14,12 @@ import java.util.Date;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "jugador_tbl")
+@Table(name = "jugador")
 public class JugadorEntidad implements Serializable {
     @Id
     @Column(name = "id_jugador", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long codigo;
     @Column(name = "nombre")
     private String nombre;
     @Column(name = "identificacion")
@@ -31,5 +31,5 @@ public class JugadorEntidad implements Serializable {
 
     @JoinColumn(name = "id_equipo", nullable = false)
     @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
-    private JugadorEntidad fkEquipo;
+    private EquipoEntidad fkEquipo;
 }

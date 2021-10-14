@@ -9,5 +9,5 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 @Repository
 public interface PosicionRepositorioJpa  extends JpaRepository<PosicionEntidad, Long> {
-    PosicionEntidad findByFkEquipo(EquipoEntidad fkEquipo);
+    PosicionEntidad findByfkEquipo(EquipoEntidad fkEquipo);
 }

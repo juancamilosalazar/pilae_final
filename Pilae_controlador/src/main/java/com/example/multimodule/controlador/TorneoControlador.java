@@ -20,7 +20,7 @@ import java.util.List;
 import static main.com.example.multimodule.transversal.mensajes.MensajesHelper.obtenerMensaje;
 
 @RestController
-@RequestMapping(path = "torneo", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(path = "torneo")
 public class TorneoControlador {
 
 	@Autowired
@@ -42,7 +42,6 @@ public class TorneoControlador {
 
 			if (UtilObjeto.objetoEsNulo(Torneo)) {
 				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_ERROR_DATOS_VACIOS_CREAR_TORNEO).getContenido();
-				//"Los datos del Torneo no pueden estar vacíos!";
 				respuesta.agregarMensaje(mensajeUsuario);
 				datosValidos = false;
 			} else {
@@ -66,7 +65,6 @@ public class TorneoControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_ERROR_INESPERADO_CREAR_TORNEO).getContenido();
-			//"error inesperado al crear el Torneo";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -86,7 +84,6 @@ public class TorneoControlador {
 
 			if (UtilObjeto.objetoEsNulo(torneoNuevo)) {
 				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_ERROR_DATOS_VACIOS_ACTUALIZAR_TORNEO).getContenido();
-				//"Los datos del Torneo no pueden estar vacíos!";
 				respuesta.agregarMensaje(mensajeUsuario);
 				datosValidos = false;
 			} else {
@@ -98,7 +95,6 @@ public class TorneoControlador {
 			if (datosValidos) {
 				torneoFachada.actualizar(torneoNuevo);
 				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_INFORMACION_ACTUALIZAR_TORNEO).getContenido();
-				//"La información del Torneo se ha modificado exitosamente";
 				respuesta.agregarMensaje(mensajeUsuario);
 				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
 				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
@@ -112,7 +108,6 @@ public class TorneoControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_ERROR_INESPERADO_ACTUALIZAR_TORNEO).getContenido();
-			//"Se ha presentado un problema inesperado modificando la información del Torneo";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -134,7 +129,6 @@ public class TorneoControlador {
 			if (datosValidos) {
 				torneoFachada.borrar(id);
 				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_INFORMACION_ELIMINAR_TORNEO).getContenido();
-				//"La información del Torneo se ha dado de baja exitosamente";
 				respuesta.agregarMensaje(mensajeUsuario);
 				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
 				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
@@ -148,7 +142,6 @@ public class TorneoControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario =obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_ERROR_INESPERADO_ELIMINAR_TORNEO).getContenido();
-			//"Se ha presentado un problema inesperado dadndo de baja la información del Torneo";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -186,7 +179,6 @@ public class TorneoControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_ERROR_INESPERADO_OBTENER_TORNEO).getContenido();
-			//"Se ha presentado un problema inesperado consultando la información del Torneo";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -213,7 +205,6 @@ public class TorneoControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosTorneoControlador.USUARIO_ERROR_INESPERADO_OBTENER_TORNEO).getContenido();
-			//"Se ha presentado un problema inesperado consultando la información de los Torneos";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);

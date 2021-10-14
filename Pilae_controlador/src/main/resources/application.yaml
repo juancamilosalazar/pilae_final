@@ -1,0 +1,13 @@
+pilae:
+  mensajeria:
+    estrategia: CACHE_MENSAJES
+#okta:
+#  oauth2:
+#    client-id: 0oawgjdsnNuSuIS8T356
+#    issuer: https://dev-583268.okta.com/oauth2/default
+
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG

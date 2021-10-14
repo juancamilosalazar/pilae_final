@@ -41,7 +41,6 @@ public class EquipoControlador {
 
 			if (UtilObjeto.objetoEsNulo(equipo)) {
 				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_DATOS_VACIOS_CREAR_EQUIPO).getContenido();
-				//"Los datos del equipo no pueden estar vacíos!";
 				respuesta.agregarMensaje(mensajeUsuario);
 				datosValidos = false;
 			} else {
@@ -65,7 +64,6 @@ public class EquipoControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_INESPERADO_CREAR_EQUIPO).getContenido();
-			//"error inesperado al crear el equipo";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -85,7 +83,6 @@ public class EquipoControlador {
 
 			if (UtilObjeto.objetoEsNulo(equipoNuevo)) {
 				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_DATOS_VACIOS_ACTUALIZAR_EQUIPO).getContenido();
-				//"Los datos del equipo no pueden estar vacíos!";
 				respuesta.agregarMensaje(mensajeUsuario);
 				datosValidos = false;
 			} else {
@@ -97,7 +94,6 @@ public class EquipoControlador {
 			if (datosValidos) {
 				equipoFachada.actualizar(equipoNuevo);
 				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_INFORMACION_ACTUALIZAR_EQUIPO).getContenido();
-				//"La información del equipo se ha modificado exitosamente";
 				respuesta.agregarMensaje(mensajeUsuario);
 				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
 				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
@@ -111,7 +107,6 @@ public class EquipoControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_INESPERADO_ACTUALIZAR_EQUIPO).getContenido();
-			//"Se ha presentado un problema inesperado modificando la información del equipo";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -133,7 +128,6 @@ public class EquipoControlador {
 			if (datosValidos) {
 				equipoFachada.borrar(id);
 				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_INFORMACION_ELIMINAR_EQUIPO).getContenido();
-				//"La información del equipo se ha dado de baja exitosamente";
 				respuesta.agregarMensaje(mensajeUsuario);
 				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
 				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
@@ -147,7 +141,6 @@ public class EquipoControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario =obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_INESPERADO_ELIMINAR_EQUIPO).getContenido();
-			//"Se ha presentado un problema inesperado dadndo de baja la información del equipo";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -185,7 +178,6 @@ public class EquipoControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_INESPERADO_OBTENER_EQUIPO).getContenido();
-			//"Se ha presentado un problema inesperado consultando la información del equipo";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
@@ -212,7 +204,6 @@ public class EquipoControlador {
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
 			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_INESPERADO_OBTENER_EQUIPO).getContenido();
-			//"Se ha presentado un problema inesperado consultando la información de los equipos";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
