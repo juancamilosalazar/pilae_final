@@ -11,16 +11,16 @@ import main.com.example.multimodule.transversal.respuesta.Respuesta;
 import main.com.example.multimodule.transversal.utilitarios.UtilObjeto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static main.com.example.multimodule.transversal.mensajes.MensajesHelper.obtenerMensaje;
 
 @RestController
+@RequestMapping(path = "partido", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 public class PartidoControlador {
 
 	@Autowired
@@ -250,7 +250,7 @@ public class PartidoControlador {
 			validadores.validarDatosCodigo(idTorneo.toString(),respuesta,datosValidos);
 			if (datosValidos) {
 				List<Partido> listaPartidos = partidoFachada.crearFixtureIdaYvuelta(idTorneo);
-				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPartidoControlador.USUARIO_INFORMACION_OBTENER_PARTIDO).getContenido();
+				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPartidoControlador.USUARIO_INFORMACION_CREAR_FIXTURE_PARTIDO).getContenido();
 				respuesta.agregarMensaje(mensajeUsuario);
 				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
 				respuesta.setResultado(listaPartidos);
@@ -264,7 +264,7 @@ public class PartidoControlador {
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
-			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPartidoControlador.USUARIO_ERROR_INESPERADO_OBTENER_PARTIDO).getContenido();
+			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPartidoControlador.USUARIO_ERROR_INESPERADO_CREAR_FIXTURE_PARTIDO).getContenido();
 			//"Se ha presentado un problema inesperado consultando la información del Partido";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
@@ -285,7 +285,7 @@ public class PartidoControlador {
 
 			if (datosValidos) {
 				List<Partido> listaPartidos = partidoFachada.crearFixtureSoloIda(idTorneo);
-				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPartidoControlador.USUARIO_INFORMACION_OBTENER_PARTIDO).getContenido();
+				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPartidoControlador.USUARIO_INFORMACION_CREAR_FIXTURE_PARTIDO).getContenido();
 				respuesta.agregarMensaje(mensajeUsuario);
 				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
 				respuesta.setResultado(listaPartidos);
@@ -299,7 +299,7 @@ public class PartidoControlador {
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
 		} catch (Exception excepcion) {
-			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPartidoControlador.USUARIO_ERROR_INESPERADO_OBTENER_PARTIDO).getContenido();
+			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPartidoControlador.USUARIO_ERROR_INESPERADO_CREAR_FIXTURE_PARTIDO).getContenido();
 			//"Se ha presentado un problema inesperado consultando la información del Partido";
 			respuesta.agregarMensaje(mensajeUsuario);
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);

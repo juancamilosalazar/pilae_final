@@ -1,8 +1,8 @@
 package co.edu.uco.mensajes.negocio;
 
-import java.util.List;
-
 import co.edu.uco.mensajes.dto.MensajeDTO;
+
+import java.util.List;
 
 public interface MensajeNegocio {
 

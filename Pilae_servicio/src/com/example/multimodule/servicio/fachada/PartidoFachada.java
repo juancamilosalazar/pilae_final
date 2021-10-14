@@ -1,6 +1,5 @@
 package com.example.multimodule.servicio.fachada;
 
-import main.com.example.multimodule.dto.Equipo;
 import main.com.example.multimodule.dto.Marcador;
 import main.com.example.multimodule.dto.Partido;
 

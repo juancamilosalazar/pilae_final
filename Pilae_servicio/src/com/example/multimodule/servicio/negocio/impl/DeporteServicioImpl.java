@@ -1,21 +1,19 @@
 package com.example.multimodule.servicio.negocio.impl;
 
 import com.example.multimodule.entidad.DeporteEntidad;
-import com.example.multimodule.entidad.TorneoEntidad;
 import com.example.multimodule.infraestructura.deporte.DeporteRepositorioJpa;
-import com.example.multimodule.infraestructura.torneo.TorneoRepositorioJpa;
 import com.example.multimodule.servicio.ensamblador.entidad.implementacion.DeporteEnsambladorEntidad;
 import com.example.multimodule.servicio.negocio.DeporteServicio;
-import com.example.multimodule.servicio.utilitario.TorneoConvertorUtilitario;
 import main.com.example.multimodule.dominio.DeporteDominio;
 import main.com.example.multimodule.transversal.excepciones.PILAEDominioExcepcion;
 import main.com.example.multimodule.transversal.excepciones.base.TipoExcepcionEnum;
 import main.com.example.multimodule.transversal.utilitarios.UtilObjeto;
 import main.com.example.multimodule.transversal.utilitarios.UtilTexto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class DeporteServicioImpl implements DeporteServicio {
 
     private DeporteRepositorioJpa repositorio;

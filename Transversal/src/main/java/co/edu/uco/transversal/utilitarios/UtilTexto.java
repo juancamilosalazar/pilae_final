@@ -1,13 +1,13 @@
 package co.edu.uco.transversal.utilitarios;
 
-import static co.edu.uco.transversal.utilitarios.UtilObjeto.objetoEsNulo;
-
 import org.apache.commons.lang3.StringUtils;
+
+import static co.edu.uco.transversal.utilitarios.UtilObjeto.objetoEsNulo;
 
 public class UtilTexto {
 
 	private static final String PATRON_SOLO_DIGITOS = "[0-9]+";
-	private static final String PATRON_SOLO_LETRAS_Y_ESPACIOS = "[A-Za-záÁéÉíÍóÓúÚñÑ ]+";
+	private static final String PATRON_SOLO_LETRAS_Y_ESPACIOS = "[A-Za-zï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ]+";
 	private static final String FORMATO_EXPRESION_REGULAR = "^{1}$";
 	public static final String VACIO = "";
 

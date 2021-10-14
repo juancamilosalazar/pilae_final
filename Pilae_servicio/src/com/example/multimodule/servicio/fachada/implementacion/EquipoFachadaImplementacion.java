@@ -1,7 +1,5 @@
 package com.example.multimodule.servicio.fachada.implementacion;
 
-import java.util.List;
-
 import com.example.multimodule.servicio.ensamblador.dto.implementacion.EquipoEnsamblador;
 import com.example.multimodule.servicio.fachada.EquipoFachada;
 import com.example.multimodule.servicio.negocio.EquipoServicio;
@@ -13,6 +11,8 @@ import main.com.example.multimodule.transversal.utilitarios.UtilObjeto;
 import main.com.example.multimodule.transversal.utilitarios.UtilTexto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 
 @Service

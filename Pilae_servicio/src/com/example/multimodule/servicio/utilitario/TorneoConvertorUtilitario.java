@@ -1,8 +1,8 @@
 package com.example.multimodule.servicio.utilitario;
 
+import com.example.multimodule.entidad.TorneoEntidad;
 import main.com.example.multimodule.dominio.TorneoDominio;
 import main.com.example.multimodule.dto.Torneo;
-import com.example.multimodule.entidad.TorneoEntidad;
 import org.modelmapper.ModelMapper;
 
 import java.util.List;

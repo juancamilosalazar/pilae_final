@@ -1,12 +1,12 @@
 package co.edu.uco.mensajes.dto;
 
-import java.io.Serializable;
-
 import co.edu.uco.mensajes.enumerador.CategoriaMensajeEnum;
 import co.edu.uco.mensajes.enumerador.TipoMensajeEnum;
 import co.edu.uco.transversal.utilitarios.ParametroDTO;
 import co.edu.uco.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.transversal.utilitarios.UtilTexto;
+
+import java.io.Serializable;
 
 public class MensajeDTO implements Serializable {
 

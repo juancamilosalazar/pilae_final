@@ -1,16 +1,12 @@
 package com.example.multimodule.servicio.negocio.impl;
 
-import com.example.multimodule.entidad.EquipoEntidad;
 import com.example.multimodule.entidad.MarcadorEntidad;
 import com.example.multimodule.entidad.PartidoEntidad;
-import com.example.multimodule.infraestructura.equipo.EquipoRepositorioJpa;
 import com.example.multimodule.infraestructura.marcador.MarcadorRepositorioJpa;
 import com.example.multimodule.infraestructura.partido.PartidoRepositorioJpa;
 import com.example.multimodule.servicio.ensamblador.entidad.implementacion.MarcadorEnsambladorEntidad;
 import com.example.multimodule.servicio.negocio.MarcadorServicio;
-import com.example.multimodule.servicio.utilitario.EquipoConvertorUtilitario;
 import com.example.multimodule.servicio.utilitario.PartidoConvertorUtilitario;
-import main.com.example.multimodule.dominio.EquipoDominio;
 import main.com.example.multimodule.dominio.MarcadorDominio;
 import main.com.example.multimodule.dominio.PartidoDominio;
 import main.com.example.multimodule.transversal.excepciones.PILAEDominioExcepcion;
@@ -18,9 +14,10 @@ import main.com.example.multimodule.transversal.excepciones.base.TipoExcepcionEn
 import main.com.example.multimodule.transversal.utilitarios.UtilObjeto;
 import main.com.example.multimodule.transversal.utilitarios.UtilTexto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class MarcadorServicioImpl  implements MarcadorServicio {
 
     private MarcadorRepositorioJpa repositorio;

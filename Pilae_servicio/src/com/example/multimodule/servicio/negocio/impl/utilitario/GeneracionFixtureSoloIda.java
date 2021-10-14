@@ -5,9 +5,10 @@ import com.example.multimodule.entidad.PartidoEntidad;
 import com.example.multimodule.entidad.TorneoEntidad;
 import com.example.multimodule.infraestructura.partido.PartidoRepositorioJpa;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.*;
-
+@Component
 public class GeneracionFixtureSoloIda {
 
     @Autowired

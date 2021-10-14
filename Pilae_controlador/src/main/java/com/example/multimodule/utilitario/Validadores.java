@@ -1,6 +1,5 @@
 package com.example.multimodule.utilitario;
 
-import main.com.example.multimodule.dto.Equipo;
 import main.com.example.multimodule.transversal.respuesta.Respuesta;
 import main.com.example.multimodule.transversal.utilitarios.UtilTexto;
 import org.springframework.stereotype.Component;
@@ -18,8 +17,8 @@ public class Validadores<T> {
             String mensajeUsuario = "El código sólo puede contener dígitos!";
             respuesta.agregarMensaje(mensajeUsuario);
             datosValidos = false;
-        } else if (UtilTexto.aplicarTrim(codigo).length() > 40) {
-            String mensajeUsuario = "El código no puede exceder los 40 caracteres!";
+        } else if (UtilTexto.aplicarTrim(codigo).length() > 60) {
+            String mensajeUsuario = "El código no puede exceder los 60 caracteres!";
             respuesta.agregarMensaje(mensajeUsuario);
             datosValidos = false;
         }

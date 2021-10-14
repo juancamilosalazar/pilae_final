@@ -1,7 +1,6 @@
 package com.example.multimodule.servicio.fachada;
 
 import main.com.example.multimodule.dto.Deporte;
-import main.com.example.multimodule.dto.Equipo;
 
 import java.util.List;
 

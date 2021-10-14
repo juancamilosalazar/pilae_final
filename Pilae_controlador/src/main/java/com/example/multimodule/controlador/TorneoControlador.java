@@ -10,6 +10,7 @@ import main.com.example.multimodule.transversal.respuesta.Respuesta;
 import main.com.example.multimodule.transversal.utilitarios.UtilObjeto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +20,7 @@ import java.util.List;
 import static main.com.example.multimodule.transversal.mensajes.MensajesHelper.obtenerMensaje;
 
 @RestController
+@RequestMapping(path = "torneo", consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 public class TorneoControlador {
 
 	@Autowired

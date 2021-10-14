@@ -1,8 +1,5 @@
 package com.example.multimodule.servicio.ensamblador.dto.implementacion;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.example.multimodule.servicio.ensamblador.dto.EnsambladorDTO;
 import main.com.example.multimodule.dominio.EquipoDominio;
 import main.com.example.multimodule.dto.Equipo;
@@ -11,6 +8,9 @@ import main.com.example.multimodule.transversal.excepciones.base.TipoExcepcionEn
 import main.com.example.multimodule.transversal.utilitarios.UtilObjeto;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Component;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class EquipoEnsamblador implements EnsambladorDTO<Equipo, EquipoDominio> {

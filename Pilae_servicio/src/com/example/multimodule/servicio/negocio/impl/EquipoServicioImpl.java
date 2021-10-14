@@ -1,17 +1,16 @@
 package com.example.multimodule.servicio.negocio.impl;
 
+import com.example.multimodule.entidad.EquipoEntidad;
 import com.example.multimodule.entidad.PosicionEntidad;
+import com.example.multimodule.entidad.TorneoEntidad;
 import com.example.multimodule.infraestructura.equipo.EquipoRepositorioJpa;
 import com.example.multimodule.infraestructura.posicion.PosicionRepositorioJpa;
 import com.example.multimodule.infraestructura.torneo.TorneoRepositorioJpa;
+import com.example.multimodule.servicio.ensamblador.entidad.implementacion.EquipoEnsambladorEntidad;
 import com.example.multimodule.servicio.negocio.EquipoServicio;
+import com.example.multimodule.servicio.utilitario.TorneoConvertorUtilitario;
 import main.com.example.multimodule.dominio.EquipoDominio;
 import main.com.example.multimodule.dominio.TorneoDominio;
-import com.example.multimodule.entidad.EquipoEntidad;
-import com.example.multimodule.entidad.TorneoEntidad;
-
-import com.example.multimodule.servicio.ensamblador.entidad.implementacion.EquipoEnsambladorEntidad;
-import com.example.multimodule.servicio.utilitario.TorneoConvertorUtilitario;
 import main.com.example.multimodule.transversal.excepciones.PILAEDominioExcepcion;
 import main.com.example.multimodule.transversal.excepciones.base.TipoExcepcionEnum;
 import main.com.example.multimodule.transversal.utilitarios.UtilObjeto;

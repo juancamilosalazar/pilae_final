@@ -1,10 +1,10 @@
 package co.edu.uco.transversal.respuesta.rest;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import co.edu.uco.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.transversal.utilitarios.UtilTexto;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Respuesta<T> {
 

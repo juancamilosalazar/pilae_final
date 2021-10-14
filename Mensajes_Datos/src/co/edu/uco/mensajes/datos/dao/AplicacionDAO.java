@@ -1,8 +1,8 @@
 package co.edu.uco.mensajes.datos.dao;
 
-import java.util.List;
-
 import co.edu.uco.mensajes.dto.AplicacionDTO;
+
+import java.util.List;
 
 public interface AplicacionDAO {
 

@@ -2,10 +2,7 @@ package com.example.multimodule.servicio.ensamblador.dto.implementacion;
 
 import com.example.multimodule.servicio.ensamblador.dto.EnsambladorDTO;
 import main.com.example.multimodule.dominio.JugadorDominio;
-import main.com.example.multimodule.dominio.EquipoDominio;
-import main.com.example.multimodule.dominio.JugadorDominio;
 import main.com.example.multimodule.dto.Jugador;
-import main.com.example.multimodule.dto.Equipo;
 import main.com.example.multimodule.transversal.excepciones.PILAEDominioExcepcion;
 import main.com.example.multimodule.transversal.excepciones.base.TipoExcepcionEnum;
 import main.com.example.multimodule.transversal.utilitarios.UtilObjeto;

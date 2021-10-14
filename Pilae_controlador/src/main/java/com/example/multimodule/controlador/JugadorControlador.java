@@ -19,6 +19,7 @@ import java.util.List;
 import static main.com.example.multimodule.transversal.mensajes.MensajesHelper.obtenerMensaje;
 
 @RestController
+@RequestMapping(path = "jugador")
 public class JugadorControlador {
 
 	@Autowired

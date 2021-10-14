@@ -1,11 +1,11 @@
 package co.edu.uco.mensajes.dto;
 
+import co.edu.uco.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.transversal.utilitarios.UtilTexto;
+
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
-
-import co.edu.uco.transversal.utilitarios.UtilObjeto;
-import co.edu.uco.transversal.utilitarios.UtilTexto;
 
 public class AplicacionDTO implements Serializable {
 

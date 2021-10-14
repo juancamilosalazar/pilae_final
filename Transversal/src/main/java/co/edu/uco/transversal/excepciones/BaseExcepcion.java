@@ -1,9 +1,8 @@
 package co.edu.uco.transversal.excepciones;
 
-import org.apache.commons.lang3.exception.ExceptionUtils;
-
 import co.edu.uco.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.transversal.utilitarios.UtilTexto;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 public class BaseExcepcion extends RuntimeException {
 
@@ -67,11 +66,11 @@ public class BaseExcepcion extends RuntimeException {
 	public String toString() {
 		
 		StringBuilder traza = new StringBuilder();
-		traza.append("Tipo excepción: ").append(getTipo()).append("\n");
+		traza.append("Tipo excepciï¿½n: ").append(getTipo()).append("\n");
 		traza.append("Componente: ").append(getComponente()).append("\n");
 		traza.append("Texto usuario: ").append(getTextoUsuario()).append("\n");
-		traza.append("Texto técnico: ").append(getTextoTecnico()).append("\n");
-		traza.append("Excepción raíz: ").append(ExceptionUtils.getStackTrace(getExcepcionRaiz())).append("\n");
+		traza.append("Texto tï¿½cnico: ").append(getTextoTecnico()).append("\n");
+		traza.append("Excepciï¿½n raï¿½z: ").append(ExceptionUtils.getStackTrace(getExcepcionRaiz())).append("\n");
 		
 		return traza.toString();
 	}

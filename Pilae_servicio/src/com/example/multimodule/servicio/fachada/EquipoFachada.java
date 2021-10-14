@@ -1,8 +1,8 @@
 package com.example.multimodule.servicio.fachada;
 
-import java.util.List;
-
 import main.com.example.multimodule.dto.Equipo;
+
+import java.util.List;
 
 
 public interface EquipoFachada {

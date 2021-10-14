@@ -1,8 +1,8 @@
 package com.example.multimodule.servicio.utilitario;
 
+import com.example.multimodule.entidad.EquipoEntidad;
 import main.com.example.multimodule.dominio.EquipoDominio;
 import main.com.example.multimodule.dto.Equipo;
-import com.example.multimodule.entidad.EquipoEntidad;
 import org.modelmapper.ModelMapper;
 
 import java.util.List;

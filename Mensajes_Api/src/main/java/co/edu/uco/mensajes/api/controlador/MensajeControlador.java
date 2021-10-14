@@ -1,17 +1,5 @@
 package co.edu.uco.mensajes.api.controlador;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import co.edu.uco.mensajes.dto.AplicacionDTO;
 import co.edu.uco.mensajes.dto.MensajeDTO;
 import co.edu.uco.mensajes.negocio.MensajeNegocio;
@@ -19,6 +7,10 @@ import co.edu.uco.transversal.respuesta.rest.EstadoRespuestaEnum;
 import co.edu.uco.transversal.respuesta.rest.Respuesta;
 import co.edu.uco.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.transversal.utilitarios.UtilTexto;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/mensaje")
@@ -84,8 +76,8 @@ public class MensajeControlador {
 			respuesta.agregarMensaje("El código del mensaje es un dato obligatorio para llevar a cabo la operación de consulta...");
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			datosValidos = false;
-		} else if (UtilTexto.aplicarTrim(codigoMensaje).length() > 40) {
-			respuesta.agregarMensaje("El código del mensaje no puede superar los 40 caracteres...");
+		} else if (UtilTexto.aplicarTrim(codigoMensaje).length() > 60) {
+			respuesta.agregarMensaje("El código del mensaje no puede superar los 60 caracteres...");
 			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 			datosValidos = false;
 		}
@@ -122,8 +114,8 @@ public class MensajeControlador {
 				respuesta.agregarMensaje("El código del mensaje es un dato obligatorio para llevar a cabo la operación de registro...");
 				respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 				datosValidos = false;
-			} else if (UtilTexto.aplicarTrim(mensaje.getCodigo()).length() > 40) {
-				respuesta.agregarMensaje("El código del mensaje no puede superar los 40 caracteres...");
+			} else if (UtilTexto.aplicarTrim(mensaje.getCodigo()).length() > 60) {
+				respuesta.agregarMensaje("El código del mensaje no puede superar los 60 caracteres...");
 				respuesta.setEstado(EstadoRespuestaEnum.ERROR);
 				datosValidos = false;
 			}

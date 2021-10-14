@@ -23,10 +23,11 @@ import main.com.example.multimodule.transversal.excepciones.base.TipoExcepcionEn
 import main.com.example.multimodule.transversal.utilitarios.UtilObjeto;
 import main.com.example.multimodule.transversal.utilitarios.UtilTexto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
-
+@Service
 public class PartidoServicioImpl implements PartidoServicio {
 
     private PartidoRepositorioJpa repositorio;
@@ -176,7 +177,7 @@ public class PartidoServicioImpl implements PartidoServicio {
         }
         TorneoEntidad torneoEntidad = obtenerTorneoEntidad(idTorneo);
 
-        List<EquipoEntidad> equipos = equipoRepositorioJpa.findByFkTorneo(torneoEntidad);
+        List<EquipoEntidad> equipos = equipoRepositorioJpa.findByTorneo(torneoEntidad);
         if(equipos.isEmpty()){
             String mensajeUsuario = "la lista de equipos está vacía";
             String mensajeTecnico = "la lista de equipos está vacía";
@@ -212,7 +213,7 @@ public class PartidoServicioImpl implements PartidoServicio {
         }
         TorneoEntidad torneoEntidad = obtenerTorneoEntidad(idTorneo);
 
-        List<EquipoEntidad> equipos = equipoRepositorioJpa.findByFkTorneo(torneoEntidad);
+        List<EquipoEntidad> equipos = equipoRepositorioJpa.findByTorneo(torneoEntidad);
         if(equipos.isEmpty()){
             String mensajeUsuario = "la lista de equipos está vacía";
             String mensajeTecnico = "la lista de equipos está vacía";

@@ -10,9 +10,11 @@ import main.com.example.multimodule.transversal.excepciones.base.TipoExcepcionEn
 import main.com.example.multimodule.transversal.utilitarios.UtilObjeto;
 import main.com.example.multimodule.transversal.utilitarios.UtilTexto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class DeporteFachadaImplementacion implements DeporteFachada {
 
     @Autowired

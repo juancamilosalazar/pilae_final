@@ -1,15 +1,5 @@
 package co.edu.uco.mensajes.transversal.utilitario;
 
-import static co.edu.uco.transversal.utilitarios.UtilObjeto.objetoEsNulo;
-import static co.edu.uco.transversal.utilitarios.UtilTexto.estaVacia;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import org.springframework.core.ParameterizedTypeReference;
-import org.springframework.http.HttpMethod;
-import org.springframework.web.client.RestTemplate;
-
 import co.edu.uco.mensajes.dto.MensajeDTO;
 import co.edu.uco.mensajes.enumerador.CategoriaMensajeEnum;
 import co.edu.uco.mensajes.enumerador.TipoMensajeEnum;
@@ -19,6 +9,15 @@ import co.edu.uco.transversal.respuesta.rest.EstadoRespuestaEnum;
 import co.edu.uco.transversal.respuesta.rest.Respuesta;
 import co.edu.uco.transversal.utilitarios.ParametroDTO;
 import co.edu.uco.transversal.utilitarios.UtilTexto;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.web.client.RestTemplate;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static co.edu.uco.transversal.utilitarios.UtilObjeto.objetoEsNulo;
+import static co.edu.uco.transversal.utilitarios.UtilTexto.estaVacia;
 
 public class CatalogoMensajes {
 

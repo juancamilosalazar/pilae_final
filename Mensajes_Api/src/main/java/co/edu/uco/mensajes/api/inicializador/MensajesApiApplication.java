@@ -1,7 +1,6 @@
 package co.edu.uco.mensajes.api.inicializador;
 
-import java.time.Duration;
-
+import co.edu.uco.mensajes.dto.AplicacionDTO;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -9,11 +8,10 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.redis.connection.RedisPassword;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.jedis.JedisClientConfiguration;
-import org.springframework.data.redis.connection.jedis.JedisClientConfiguration.JedisClientConfigurationBuilder;
 import org.springframework.data.redis.connection.jedis.JedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import co.edu.uco.mensajes.dto.AplicacionDTO;
+import java.time.Duration;
 
 @SpringBootApplication
 @ComponentScan(basePackages = { "co.edu.uco.mensajes" })
@@ -22,10 +20,10 @@ public class MensajesApiApplication {
 	@Bean
 	public JedisConnectionFactory jedisConnectionFactory() {
 		RedisStandaloneConfiguration configuracionRedis = new RedisStandaloneConfiguration();
-		configuracionRedis.setHostName("redis-17748.c266.us-east-1-3.ec2.cloud.redislabs.com");
-		configuracionRedis.setPort(17748);
+		configuracionRedis.setHostName("redis-19897.c60.us-west-1-2.ec2.cloud.redislabs.com");
+		configuracionRedis.setPort(19897);
 		configuracionRedis.setDatabase(0);
-		configuracionRedis.setPassword(RedisPassword.of("conexionaredisdesdeequipocliente56451541564"));
+		configuracionRedis.setPassword(RedisPassword.of("qwf2OvWi2tQcbJ5TipKWtpesfi0srBEN"));
 
 		JedisClientConfiguration.JedisClientConfigurationBuilder configuracionJedis = JedisClientConfiguration.builder();
 		configuracionJedis.connectTimeout(Duration.ofSeconds(60));

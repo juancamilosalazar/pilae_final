@@ -1,13 +1,13 @@
 package com.example.multimodule.controlador;
 
-import main.com.example.multimodule.dto.Equipo;
 import com.example.multimodule.servicio.fachada.EquipoFachada;
+import com.example.multimodule.utilitario.Validadores;
+import main.com.example.multimodule.dto.Equipo;
 import main.com.example.multimodule.transversal.excepciones.PILAEExcepcion;
 import main.com.example.multimodule.transversal.mensajes.CodigosMensajes;
 import main.com.example.multimodule.transversal.respuesta.EstadoRespuestaEnum;
 import main.com.example.multimodule.transversal.respuesta.Respuesta;
 import main.com.example.multimodule.transversal.utilitarios.UtilObjeto;
-import com.example.multimodule.utilitario.Validadores;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +19,7 @@ import java.util.List;
 import static main.com.example.multimodule.transversal.mensajes.MensajesHelper.obtenerMensaje;
 
 @RestController
+@RequestMapping(path = "equipo")
 public class EquipoControlador {
 
 	@Autowired

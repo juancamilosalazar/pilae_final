@@ -1,23 +1,20 @@
 package com.example.multimodule.servicio.fachada.implementacion;
 
 import com.example.multimodule.servicio.ensamblador.dto.implementacion.JugadorEnsamblador;
-import com.example.multimodule.servicio.ensamblador.dto.implementacion.EquipoEnsamblador;
 import com.example.multimodule.servicio.fachada.JugadorFachada;
-import com.example.multimodule.servicio.fachada.EquipoFachada;
 import com.example.multimodule.servicio.negocio.JugadorServicio;
-import com.example.multimodule.servicio.negocio.EquipoServicio;
 import main.com.example.multimodule.dominio.JugadorDominio;
-import main.com.example.multimodule.dominio.EquipoDominio;
 import main.com.example.multimodule.dto.Jugador;
-import main.com.example.multimodule.dto.Equipo;
 import main.com.example.multimodule.transversal.excepciones.PILAEDominioExcepcion;
 import main.com.example.multimodule.transversal.excepciones.base.TipoExcepcionEnum;
 import main.com.example.multimodule.transversal.utilitarios.UtilObjeto;
 import main.com.example.multimodule.transversal.utilitarios.UtilTexto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class JugadorFachadaImplementacion implements JugadorFachada {
 
     @Autowired
