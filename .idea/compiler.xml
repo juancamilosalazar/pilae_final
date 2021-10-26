@@ -34,7 +34,7 @@
       <module name="Pilae_entidad" target="1.5" />
       <module name="Pilae_infraestructura" target="1.5" />
       <module name="Pilae_servicio" target="1.5" />
-      <module name="Pilae_transversal" target="1.5" />
+      <module name="Pilae_transversal" target="11" />
       <module name="Transversal" target="1.5" />
       <module name="UCOBANK_Api" target="11" />
       <module name="UCOBANK_Datos" target="1.8" />
