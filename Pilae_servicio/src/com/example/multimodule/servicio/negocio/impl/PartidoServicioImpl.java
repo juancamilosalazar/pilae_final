@@ -26,6 +26,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 @Service
 public class PartidoServicioImpl implements PartidoServicio {
 
@@ -64,6 +67,19 @@ public class PartidoServicioImpl implements PartidoServicio {
     }
 
     @Override
+    public List<PartidoDominio> obtenerPorTorneo(Long idTorneo) {
+        List<PartidoEntidad> entidadList = repositorio.findByFkTorneo(ObtenerTorneoEntidad(idTorneo));
+        if(entidadList.isEmpty()){
+            String mensajeUsuario = "la lista de Partidos está vacía";
+            String mensajeTecnico = "la lista de Partidos está vacía";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        }else{
+            List<PartidoDominio> dominios = PartidoEnsambladorEntidad.obtenerPartidoEnsambladorEntidad().ensamblarListaDominio(entidadList);
+            return dominios;
+        }
+    }
+
+    @Override
     public PartidoDominio obtenerPorId(Long id)  {
 
         if (UtilTexto.estaVacia(id.toString())) {
@@ -91,12 +107,14 @@ public class PartidoServicioImpl implements PartidoServicio {
             throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
         }
 
-        PartidoDominio resultadosConsulta = obtenerPorId(dominio.getCodigo());
+        if(Objects.nonNull(dominio.getCodigo())) {
+            Optional<PartidoEntidad> resultadosConsulta = repositorio.findById(dominio.getCodigo());
 
-        if (!UtilObjeto.objetoEsNulo(resultadosConsulta)) {
-            String mensajeUsuario = "Partido con el código existente";
-            String mensajeTecnico = "Partido con el código existente";
-            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+            if (resultadosConsulta.isPresent()) {
+                String mensajeUsuario = "Partido con el código existente";
+                String mensajeTecnico = "Partido con el código existente";
+                throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+            }
         }
         dominio.setFkEquipoLocal(ObtenerEquipoDelPartido(equipoLocal));
         dominio.setFkEquipoVisitante(ObtenerEquipoDelPartido(equipoVisitante));
@@ -182,7 +200,7 @@ public class PartidoServicioImpl implements PartidoServicio {
         }
         TorneoEntidad torneoEntidad = obtenerTorneoEntidad(idTorneo);
 
-        List<EquipoEntidad> equipos = equipoRepositorioJpa.findByTorneo(torneoEntidad);
+        List<EquipoEntidad> equipos = equipoRepositorioJpa.findByFkTorneo(torneoEntidad);
         if(equipos.isEmpty()){
             String mensajeUsuario = "la lista de equipos está vacía";
             String mensajeTecnico = "la lista de equipos está vacía";
@@ -218,7 +236,7 @@ public class PartidoServicioImpl implements PartidoServicio {
         }
         TorneoEntidad torneoEntidad = obtenerTorneoEntidad(idTorneo);
 
-        List<EquipoEntidad> equipos = equipoRepositorioJpa.findByTorneo(torneoEntidad);
+        List<EquipoEntidad> equipos = equipoRepositorioJpa.findByFkTorneo(torneoEntidad);
         if(equipos.isEmpty()){
             String mensajeUsuario = "la lista de equipos está vacía";
             String mensajeTecnico = "la lista de equipos está vacía";
@@ -326,5 +344,14 @@ public class PartidoServicioImpl implements PartidoServicio {
         });
         TorneoDominio torneoDominio = TorneoConvertorUtilitario.convertirTorneoEntidadEnTorneoDominio(torneo);
         dominio.setFkTorneo(torneoDominio);
+    }
+
+    private TorneoEntidad ObtenerTorneoEntidad(Long torneoId) {
+        TorneoEntidad torneo = torneoRepositorioJpa.findById(torneoId).orElseThrow(()->{
+            String mensajeUsuario = "Torneo no encontrado";
+            String mensajeTecnico = "Torneo no encontrado";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        });
+        return torneo;
     }
 }

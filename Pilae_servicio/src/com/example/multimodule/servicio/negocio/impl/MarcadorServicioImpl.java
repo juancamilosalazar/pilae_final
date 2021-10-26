@@ -2,8 +2,10 @@ package com.example.multimodule.servicio.negocio.impl;
 
 import com.example.multimodule.entidad.MarcadorEntidad;
 import com.example.multimodule.entidad.PartidoEntidad;
+import com.example.multimodule.entidad.TorneoEntidad;
 import com.example.multimodule.infraestructura.marcador.MarcadorRepositorioJpa;
 import com.example.multimodule.infraestructura.partido.PartidoRepositorioJpa;
+import com.example.multimodule.infraestructura.torneo.TorneoRepositorioJpa;
 import com.example.multimodule.servicio.ensamblador.entidad.implementacion.MarcadorEnsambladorEntidad;
 import com.example.multimodule.servicio.negocio.MarcadorServicio;
 import com.example.multimodule.servicio.utilitario.PartidoConvertorUtilitario;
@@ -17,17 +19,22 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 @Service
 public class MarcadorServicioImpl  implements MarcadorServicio {
 
     private MarcadorRepositorioJpa repositorio;
     private PartidoRepositorioJpa partidoRepositorioJpa;
+    private TorneoRepositorioJpa torneoRepositorio;
 
 
     @Autowired
-    public MarcadorServicioImpl(MarcadorRepositorioJpa repositorio, PartidoRepositorioJpa partidoRepositorioJpa) {
+    public MarcadorServicioImpl(MarcadorRepositorioJpa repositorio, PartidoRepositorioJpa partidoRepositorioJpa, TorneoRepositorioJpa torneoRepositorio) {
         this.repositorio = repositorio;
         this.partidoRepositorioJpa = partidoRepositorioJpa;
+        this.torneoRepositorio = torneoRepositorio;
     }
 
     @Override
@@ -73,13 +80,14 @@ public class MarcadorServicioImpl  implements MarcadorServicio {
             String mensajeTecnico = "Marcador no puede estar vacío";
             throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
         }
+        if(Objects.nonNull(dominio.getCodigo())) {
+            Optional<MarcadorEntidad> resultadosConsulta = repositorio.findById(dominio.getCodigo());
 
-        MarcadorDominio resultadosConsulta = obtenerPorId(dominio.getCodigo());
-
-        if (!UtilObjeto.objetoEsNulo(resultadosConsulta)) {
-            String mensajeUsuario = "Marcador con el código existente";
-            String mensajeTecnico = "Marcador con el código existente";
-            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+            if (resultadosConsulta.isPresent()) {
+                String mensajeUsuario = "Marcador con el código existente";
+                String mensajeTecnico = "Marcador con el código existente";
+                throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+            }
         }
         ObtenerEquipoDelMarcador(partidoId,dominio);
         MarcadorEntidad entidad = MarcadorEnsambladorEntidad.obtenerMarcadorEnsambladorEntidad().ensamblarEntidad(dominio);
@@ -129,6 +137,44 @@ public class MarcadorServicioImpl  implements MarcadorServicio {
         repositorio.delete(entidad);
     }
 
+    @Override
+    public List<MarcadorDominio> obtenerPorPartido(Long id) {
+        if (UtilTexto.estaVacia(id.toString())) {
+            String mensajeUsuario = "el id esta vacío";
+            String mensajeTecnico = "el id esta vacío";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        }
+        List<MarcadorEntidad> entidadList = repositorio.findByFkPartido(obtenerPartidoEntidad(id));
+
+        if(entidadList.isEmpty()){
+            String mensajeUsuario = "la lista de Marcadores está vacía";
+            String mensajeTecnico = "la lista de Marcadores está vacía";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        }else{
+            List<MarcadorDominio> dominios = MarcadorEnsambladorEntidad.obtenerMarcadorEnsambladorEntidad().ensamblarListaDominio(entidadList);
+            return dominios;
+        }
+    }
+
+    @Override
+    public List<MarcadorDominio> obtenerPorTorneo(Long id) {
+        if (UtilTexto.estaVacia(id.toString())) {
+            String mensajeUsuario = "el id esta vacío";
+            String mensajeTecnico = "el id esta vacío";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        }
+        List<MarcadorEntidad> entidadList = repositorio.findByFkPartidoFkTorneo(obtenerTorneoEntidad(id));
+
+        if(entidadList.isEmpty()){
+            String mensajeUsuario = "la lista de Marcadores está vacía";
+            String mensajeTecnico = "la lista de Marcadores está vacía";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        }else{
+            List<MarcadorDominio> dominios = MarcadorEnsambladorEntidad.obtenerMarcadorEnsambladorEntidad().ensamblarListaDominio(entidadList);
+            return dominios;
+        }
+    }
+
     private void cambiarValores(MarcadorDominio nuevo, MarcadorDominio actual) {
         actual.setEquipoGanador(nuevo.getEquipoGanador());
         actual.setEquipoLocalMrc(nuevo.getEquipoLocalMrc());
@@ -146,4 +192,20 @@ public class MarcadorServicioImpl  implements MarcadorServicio {
         dominio.setFkPartido(partidoDominio);
     }
 
+    private PartidoEntidad obtenerPartidoEntidad(Long partidoId) {
+        PartidoEntidad partidoEntidad = partidoRepositorioJpa.findById(partidoId).orElseThrow(()->{
+            String mensajeUsuario = "Partido no encontrado";
+            String mensajeTecnico = "Partido no encontrado";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        });
+        return partidoEntidad;
+    }
+    private TorneoEntidad obtenerTorneoEntidad(Long torneoId) {
+        TorneoEntidad torneoEntidad = torneoRepositorio.findById(torneoId).orElseThrow(()->{
+            String mensajeUsuario = "Partido no encontrado";
+            String mensajeTecnico = "Partido no encontrado";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        });
+        return torneoEntidad;
+    }
 }

@@ -4,7 +4,7 @@ public class Torneo implements java.io.Serializable{
     private Long codigo;
     private String nombre;
     private String descripcion;
-    private Deporte deporte;
+    private Deporte fkDeporte;
 
     public Long getCodigo() {
         return codigo;
@@ -30,11 +30,11 @@ public class Torneo implements java.io.Serializable{
         this.descripcion = descripcion;
     }
 
-    public Deporte getDeporte() {
-        return deporte;
+    public Deporte getFkDeporte() {
+        return fkDeporte;
     }
 
-    public void setDeporte(Deporte deporte) {
-        this.deporte = deporte;
+    public void setFkDeporte(Deporte fkDeporte) {
+        this.fkDeporte = fkDeporte;
     }
 }

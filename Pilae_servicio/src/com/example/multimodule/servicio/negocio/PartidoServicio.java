@@ -11,6 +11,7 @@ import java.util.List;
 public interface PartidoServicio {
 
     List<PartidoDominio> obtenerTodos() ;
+    List<PartidoDominio> obtenerPorTorneo(Long idToreno) ;
     PartidoDominio obtenerPorId(Long id) ;
     void crear(PartidoDominio partido, Long equipoVisitante,Long equipoLocal,Long torneoId) ;
     void actualizar( PartidoDominio nuevo);

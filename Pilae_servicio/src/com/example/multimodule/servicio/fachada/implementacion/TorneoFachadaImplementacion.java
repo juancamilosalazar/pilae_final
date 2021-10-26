@@ -52,7 +52,7 @@ public class TorneoFachadaImplementacion implements TorneoFachada {
     public void actualizar(Torneo dto) {
         if (UtilObjeto.objetoEsNulo(dto)) {
             String mensajeUsuario = "Torneo no puede ser nulo";
-            String mensajeTecnico = "eqyuipo nulo";
+            String mensajeTecnico = "Torneo nulo";
             throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
         }
 

@@ -70,4 +70,14 @@ public class JugadorFachadaImplementacion implements JugadorFachada {
         }
         servicio.borrar(id);
     }
+
+    @Override
+    public List<Jugador> obtenerPorEquipo(Long id) {
+        if (UtilTexto.estaVacia(id.toString())) {
+            String mensajeUsuario = "se requiere id para la consulta";
+            String mensajeTecnico = "se requiere id para la consulta";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        }
+        return JugadorEnsamblador.obtenerJugadorEnsambladorDTO().ensamblarListaDTO(servicio.obtenerPorEquipo(id));
+    }
 }

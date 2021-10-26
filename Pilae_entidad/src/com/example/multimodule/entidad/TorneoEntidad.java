@@ -22,8 +22,8 @@ public class TorneoEntidad  implements Serializable {
     private String descripcion;
 
     @JoinColumn(name = "id_deporte")
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private DeporteEntidad deporte;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private DeporteEntidad fkDeporte;
 
     public Long getCodigo() {
         return codigo;
@@ -49,11 +49,11 @@ public class TorneoEntidad  implements Serializable {
         this.descripcion = descripcion;
     }
 
-    public DeporteEntidad getDeporte() {
-        return deporte;
+    public DeporteEntidad getFkDeporte() {
+        return fkDeporte;
     }
 
-    public void setDeporte(DeporteEntidad deporteEntidad) {
-        this.deporte = deporteEntidad;
+    public void setFkDeporte(DeporteEntidad deporteEntidad) {
+        this.fkDeporte = deporteEntidad;
     }
 }

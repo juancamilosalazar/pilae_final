@@ -1,5 +1,6 @@
 package com.example.multimodule.servicio.fachada.implementacion;
 
+import com.example.multimodule.servicio.ensamblador.dto.implementacion.EquipoEnsamblador;
 import com.example.multimodule.servicio.ensamblador.dto.implementacion.MarcadorEnsamblador;
 import com.example.multimodule.servicio.ensamblador.dto.implementacion.PartidoEnsamblador;
 import com.example.multimodule.servicio.fachada.PartidoFachada;
@@ -90,7 +91,12 @@ public class PartidoFachadaImplementacion implements PartidoFachada {
 
     @Override
     public List<Partido> obtenerPorTorneo(Long idTorneo) {
-        return null;
+        if (UtilTexto.estaVacia(idTorneo.toString())) {
+            String mensajeUsuario = "se requiere id para la consulta";
+            String mensajeTecnico = "se requiere id para la consulta";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        }
+        return PartidoEnsamblador.obtenerPartidoEnsambladorDTO().ensamblarListaDTO(servicio.obtenerPorTorneo(idTorneo));
     }
 
     @Override

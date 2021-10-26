@@ -17,6 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 @Service
 public class JugadorServicioImpl implements JugadorServicio {
 
@@ -73,15 +76,16 @@ public class JugadorServicioImpl implements JugadorServicio {
             String mensajeTecnico = "Jugador no puede estar vacío";
             throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
         }
+        if(Objects.nonNull(dominio.getCodigo())) {
+            Optional<JugadorEntidad> resultadosConsulta = repositorio.findById(dominio.getCodigo());
 
-        JugadorDominio resultadosConsulta = obtenerPorId(dominio.getCodigo());
-
-        if (!UtilObjeto.objetoEsNulo(resultadosConsulta)) {
-            String mensajeUsuario = "Jugador con el código existente";
-            String mensajeTecnico = "Jugador con el código existente";
-            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+            if (resultadosConsulta.isPresent()) {
+                String mensajeUsuario = "Jugador con el código existente";
+                String mensajeTecnico = "Jugador con el código existente";
+                throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+            }
         }
-        ObtenerEquipoDelJugador(equipoId,dominio);
+        obtenerEquipoDelJugador(equipoId,dominio);
         JugadorEntidad entidad = JugadorEnsambladorEntidad.obtenerJugadorEnsambladorEntidad().ensamblarEntidad(dominio);
         repositorio.save(entidad);
     }
@@ -129,6 +133,24 @@ public class JugadorServicioImpl implements JugadorServicio {
         repositorio.delete(entidad);
     }
 
+    @Override
+    public List<JugadorDominio> obtenerPorEquipo(Long id) {
+        if (UtilTexto.estaVacia(id.toString())) {
+            String mensajeUsuario = "el id esta vacío";
+            String mensajeTecnico = "el id esta vacío";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        }
+        List<JugadorEntidad> entidadList = repositorio.findByFkEquipo(obtenerEquipoEntidad(id));
+        if(entidadList.isEmpty()){
+            String mensajeUsuario = "la lista de Jugadores está vacía";
+            String mensajeTecnico = "la lista de Jugadores está vacía";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        }else{
+            List<JugadorDominio> dominios = JugadorEnsambladorEntidad.obtenerJugadorEnsambladorEntidad().ensamblarListaDominio(entidadList);
+            return dominios;
+        }
+    }
+
     private void cambiarValores(JugadorDominio nuevo, JugadorDominio actual) {
         actual.setNombre(nuevo.getNombre());
         actual.setFkEquipo(nuevo.getFkEquipo());
@@ -136,7 +158,7 @@ public class JugadorServicioImpl implements JugadorServicio {
         actual.setFechaNacimiento(nuevo.getFechaNacimiento());
     }
 
-    private void ObtenerEquipoDelJugador(Long equipoId, JugadorDominio dominio) {
+    private void obtenerEquipoDelJugador(Long equipoId, JugadorDominio dominio) {
         EquipoEntidad equipoEntidad =equipoRepositorioJpa.findById(equipoId).orElseThrow(()->{
             String mensajeUsuario = "Torneo no encontrado";
             String mensajeTecnico = "Torneo no encontrado";
@@ -144,6 +166,15 @@ public class JugadorServicioImpl implements JugadorServicio {
         });
         EquipoDominio equipoDominio = EquipoConvertorUtilitario.convertirEquipoEntidadEnEquipoDominio(equipoEntidad);
         dominio.setFkEquipo(equipoDominio);
+    }
+
+    private EquipoEntidad obtenerEquipoEntidad(Long equipoId) {
+        EquipoEntidad equipoEntidad =equipoRepositorioJpa.findById(equipoId).orElseThrow(()->{
+            String mensajeUsuario = "Torneo no encontrado";
+            String mensajeTecnico = "Torneo no encontrado";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        });
+        return equipoEntidad;
     }
 
 }

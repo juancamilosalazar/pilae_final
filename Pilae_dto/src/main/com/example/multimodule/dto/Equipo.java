@@ -6,7 +6,7 @@ public class Equipo implements java.io.Serializable{
     private String nombre;
     private String locacion;
     private String genero;
-    private Torneo torneo;
+    private Torneo fkTorneo;
 
     public Long getCodigo() {
         return codigo;
@@ -40,11 +40,11 @@ public class Equipo implements java.io.Serializable{
         this.genero = genero;
     }
 
-    public Torneo getTorneo() {
-        return torneo;
+    public Torneo getFkTorneo() {
+        return fkTorneo;
     }
 
-    public void setTorneo(Torneo torneo) {
-        this.torneo = torneo;
+    public void setFkTorneo(Torneo fkTorneo) {
+        this.fkTorneo = fkTorneo;
     }
 }

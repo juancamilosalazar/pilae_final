@@ -12,4 +12,5 @@ public interface JugadorFachada {
 	void crear(Jugador jugador, Long equipoId) ;
 	void actualizar( Jugador jugadorNuevo);
 	void borrar(Long id);
+    List<Jugador> obtenerPorEquipo(Long id);
 }

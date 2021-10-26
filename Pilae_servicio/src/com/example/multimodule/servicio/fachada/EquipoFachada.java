@@ -7,7 +7,8 @@ import java.util.List;
 
 public interface EquipoFachada {
 
-	List<Equipo> obtenerTodos() ;
+	List<Equipo> obtenerTodos();
+	List<Equipo> obtenerPorTorneo(Long torneoId);
 	Equipo obtenerPorId(Long id) ;
 	void crear(Equipo equipo, Long torneoId) ;
 	void actualizar( Equipo equipoNuevo);

@@ -14,4 +14,6 @@ public interface JugadorServicio {
     void crear(JugadorDominio jugador, Long torneoId) ;
     void actualizar( JugadorDominio nuevo);
     void borrar(Long id);
+
+    List<JugadorDominio> obtenerPorEquipo(Long id);
 }

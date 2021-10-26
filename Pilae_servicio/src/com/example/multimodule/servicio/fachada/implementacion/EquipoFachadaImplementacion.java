@@ -28,6 +28,16 @@ public class EquipoFachadaImplementacion implements EquipoFachada {
 	}
 
 	@Override
+	public List<Equipo> obtenerPorTorneo(Long torneoId) {
+		if (UtilTexto.estaVacia(torneoId.toString())) {
+			String mensajeUsuario = "se requiere id para la consulta";
+			String mensajeTecnico = "se requiere id para la consulta";
+			throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+		}
+		return EquipoEnsamblador.obtenerEquipoEnsambladorDTO().ensamblarListaDTO(equipoServicio.obtenerPorTorneo(torneoId));
+	}
+
+	@Override
 	public Equipo obtenerPorId(Long id) {
 		if (UtilTexto.estaVacia(id.toString())) {
 			String mensajeUsuario = "se requiere id para la consulta";

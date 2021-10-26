@@ -45,7 +45,6 @@ public class EquipoControlador {
 				datosValidos = false;
 			} else {
 				validadores.validarDatosNombre(equipo.getNombre(),respuesta,datosValidos);
-				validadores.validarDatosCodigo(equipo.getCodigo().toString(),respuesta,datosValidos);
 			}
 
 			if (datosValidos) {
@@ -88,7 +87,7 @@ public class EquipoControlador {
 			} else {
 				equipoNuevo.setCodigo(id);
 				validadores.validarDatosNombre(equipoNuevo.getNombre(),respuesta,datosValidos);
-				validadores.validarDatosCodigo(equipoNuevo.getCodigo().toString(),respuesta,datosValidos);
+
 			}
 
 			if (datosValidos) {
@@ -185,6 +184,43 @@ public class EquipoControlador {
 
 		return respuestaSolicitud;
 	}
+
+	@GetMapping(params = {"idTorneo"})
+	public ResponseEntity<Respuesta<Equipo>> consultarPorTorneo(@RequestParam("idTorneo") final Long id) {
+
+		ResponseEntity<Respuesta<Equipo>> respuestaSolicitud;
+		Respuesta<Equipo> respuesta = new Respuesta<>();
+		boolean datosValidos = true;
+
+		try {
+
+			validadores.validarDatosCodigo(id.toString(),respuesta,datosValidos);
+
+			if (datosValidos) {
+				List<Equipo> listaEquipos = equipoFachada.obtenerPorTorneo(id);
+				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_INFORMACION_OBTENER_EQUIPO).getContenido();
+				respuesta.agregarMensaje(mensajeUsuario);
+				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
+				respuesta.setResultado(listaEquipos);
+				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
+			} else {
+				respuesta.setEstado(EstadoRespuestaEnum.ERROR);
+				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+			}
+		} catch (PILAEExcepcion excepcion) {
+			respuesta.agregarMensaje(excepcion.getTextoUsuario());
+			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
+			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+		} catch (Exception excepcion) {
+			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosEquipoControlador.USUARIO_ERROR_INESPERADO_OBTENER_EQUIPO).getContenido();
+			respuesta.agregarMensaje(mensajeUsuario);
+			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
+			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+		}
+
+		return respuestaSolicitud;
+	}
+
 
 	@GetMapping
 	public ResponseEntity<Respuesta<Equipo>> consultar() {

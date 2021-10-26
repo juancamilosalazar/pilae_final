@@ -6,14 +6,14 @@ public class EquipoDominio implements java.io.Serializable{
     private String nombre;
     private String locacion;
     private String genero;
-    private TorneoDominio torneo;
+    private TorneoDominio fkTorneo;
 
-    public EquipoDominio(Long codigo, String nombre, String locacion, String genero, TorneoDominio torneo) {
+    public EquipoDominio(Long codigo, String nombre, String locacion, String genero, TorneoDominio fkTorneo) {
         this.codigo = codigo;
         this.nombre = nombre;
         this.locacion = locacion;
         this.genero = genero;
-        this.torneo = torneo;
+        this.fkTorneo = fkTorneo;
     }
 
     public EquipoDominio() {
@@ -51,11 +51,11 @@ public class EquipoDominio implements java.io.Serializable{
         this.genero = genero;
     }
 
-    public TorneoDominio getTorneo() {
-        return torneo;
+    public TorneoDominio getFkTorneo() {
+        return fkTorneo;
     }
 
-    public void setTorneo(TorneoDominio torneo) {
-        this.torneo = torneo;
+    public void setFkTorneo(TorneoDominio fkTorneo) {
+        this.fkTorneo = fkTorneo;
     }
 }

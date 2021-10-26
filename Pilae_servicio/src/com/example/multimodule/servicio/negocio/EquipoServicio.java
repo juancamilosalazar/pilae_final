@@ -15,4 +15,5 @@ public interface EquipoServicio {
     void crear(EquipoDominio equipo, Long torneoId) ;
     void actualizar( EquipoDominio equipoNuevo);
     void borrar(Long id);
+    List<EquipoDominio> obtenerPorTorneo(Long torneoId);
 }

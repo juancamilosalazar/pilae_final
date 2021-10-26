@@ -46,7 +46,6 @@ public class TorneoControlador {
 				datosValidos = false;
 			} else {
 				validadores.validarDatosNombre(Torneo.getNombre(),respuesta,datosValidos);
-				validadores.validarDatosCodigo(Torneo.getCodigo().toString(),respuesta,datosValidos);
 			}
 
 			if (datosValidos) {

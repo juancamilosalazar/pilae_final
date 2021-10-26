@@ -14,4 +14,7 @@ public interface MarcadorServicio {
     void crear(MarcadorDominio marcador, Long torneoId) ;
     void actualizar( MarcadorDominio nuevo);
     void borrar(Long id);
+    List<MarcadorDominio> obtenerPorPartido(Long id);
+
+    List<MarcadorDominio> obtenerPorTorneo(Long id);
 }

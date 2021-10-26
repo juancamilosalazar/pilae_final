@@ -23,8 +23,8 @@ public class EquipoEntidad implements Serializable {
     private String genero;
 
     @JoinColumn(name = "id_torneo")
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    private TorneoEntidad torneo;
+    @ManyToOne(cascade = CascadeType.MERGE)
+    private TorneoEntidad fkTorneo;
 
 
     public long getCodigo() {
@@ -59,11 +59,11 @@ public class EquipoEntidad implements Serializable {
         this.genero = genero;
     }
 
-    public TorneoEntidad getTorneo() {
-        return torneo;
+    public TorneoEntidad getFkTorneo() {
+        return fkTorneo;
     }
 
-    public void setTorneo(TorneoEntidad torneoEntidad) {
-        this.torneo = torneoEntidad;
+    public void setFkTorneo(TorneoEntidad torneoEntidad) {
+        this.fkTorneo = torneoEntidad;
     }
 }

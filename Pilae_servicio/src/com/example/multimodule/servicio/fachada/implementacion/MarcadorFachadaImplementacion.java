@@ -73,11 +73,21 @@ public class MarcadorFachadaImplementacion implements MarcadorFachada {
     //TODO HACER CONSULTA
     @Override
     public List<Marcador> obtenerPorIdPartido(Long id) {
-        return null;
+        if (UtilTexto.estaVacia(id.toString())) {
+            String mensajeUsuario = "se requiere id para la consulta";
+            String mensajeTecnico = "se requiere id para la consulta";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        }
+        return MarcadorEnsamblador.obtenerMarcadorEnsambladorDTO().ensamblarListaDTO(servicio.obtenerPorPartido(id));
     }
 
     @Override
     public List<Marcador> obtenerPorIdTorneo(Long id) {
-        return null;
+        if (UtilTexto.estaVacia(id.toString())) {
+            String mensajeUsuario = "se requiere id para la consulta";
+            String mensajeTecnico = "se requiere id para la consulta";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        }
+        return MarcadorEnsamblador.obtenerMarcadorEnsambladorDTO().ensamblarListaDTO(servicio.obtenerPorTorneo(id));
     }
 }

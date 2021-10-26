@@ -17,6 +17,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 @Service
 public class TorneoServicioImpl implements TorneoServicio {
 
@@ -74,12 +77,14 @@ public class TorneoServicioImpl implements TorneoServicio {
             throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
         }
 
-        TorneoDominio resultadosConsulta = obtenerPorId(dominio.getCodigo());
+        if(Objects.nonNull(dominio.getCodigo())){
+            Optional<TorneoEntidad> resultadosConsulta = repositorio.findById(dominio.getCodigo());
 
-        if (!UtilObjeto.objetoEsNulo(resultadosConsulta)) {
-            String mensajeUsuario = "Torneo con el código existente";
-            String mensajeTecnico = "Torneo con el código existente";
-            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+            if (resultadosConsulta.isPresent()) {
+                String mensajeUsuario = "Torneo con el código existente";
+                String mensajeTecnico = "Torneo con el código existente";
+                throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+            }
         }
         ObtenerDeporteDelTorneo(deporteId,dominio);
         TorneoEntidad entidad = TorneoEnsambladorEntidad.obtenerTorneoEnsambladorEntidad().ensamblarEntidad(dominio);
@@ -131,7 +136,6 @@ public class TorneoServicioImpl implements TorneoServicio {
 
     private void cambiarValores(TorneoDominio nuevo, TorneoDominio actual) {
         actual.setNombre(nuevo.getNombre());
-        actual.setDeporte(nuevo.getDeporte());
         actual.setDescripcion(nuevo.getDescripcion());
     }
 
@@ -142,7 +146,7 @@ public class TorneoServicioImpl implements TorneoServicio {
             throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
         });
         DeporteDominio deporteDominio = DeporteConvertorUtilitario.convertirDeporteEntidadEnDeporteDominio(deporteEntidad);
-        dominio.setDeporte(deporteDominio);
+        dominio.setFkDeporte(deporteDominio);
     }
 
 }

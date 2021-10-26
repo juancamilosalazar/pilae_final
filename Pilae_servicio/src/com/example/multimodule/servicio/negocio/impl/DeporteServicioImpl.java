@@ -13,6 +13,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
+import java.util.Optional;
+
 @Service
 public class DeporteServicioImpl implements DeporteServicio {
 
@@ -60,22 +63,24 @@ public class DeporteServicioImpl implements DeporteServicio {
     }
 
     @Override
-    public void crear(DeporteDominio DeporteDominio)  {
+    public void crear(DeporteDominio deporteDominio)  {
 
-        if (UtilObjeto.objetoEsNulo(DeporteDominio)) {
+        if (UtilObjeto.objetoEsNulo(deporteDominio)) {
             String mensajeUsuario = "Deporte no puede estar vacío";
             String mensajeTecnico = "Deporte no puede estar vacío";
             throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
         }
 
-        DeporteDominio resultadosConsulta = obtenerPorId(DeporteDominio.getCodigo());
+        if(Objects.nonNull(deporteDominio.getCodigo())) {
+            Optional<DeporteEntidad> resultadosConsulta = repositorio.findById(deporteDominio.getCodigo());
 
-        if (!UtilObjeto.objetoEsNulo(resultadosConsulta)) {
-            String mensajeUsuario = "Deporte con el código existente";
-            String mensajeTecnico = "Deporte con el código existente";
-            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+            if (resultadosConsulta.isPresent()) {
+                String mensajeUsuario = "Deporte con el código existente";
+                String mensajeTecnico = "Deporte con el código existente";
+                throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+            }
         }
-        DeporteEntidad DeporteEntidad = DeporteEnsambladorEntidad.obtenerDeporteEnsambladorEntidad().ensamblarEntidad(DeporteDominio);
+        DeporteEntidad DeporteEntidad = DeporteEnsambladorEntidad.obtenerDeporteEnsambladorEntidad().ensamblarEntidad(deporteDominio);
         repositorio.save(DeporteEntidad);
     }
 

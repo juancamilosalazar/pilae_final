@@ -69,5 +69,40 @@ public class PosicionControlador {
 
 		return respuestaSolicitud;
 	}
+	@GetMapping(params = {"idTorneo"})
+	public ResponseEntity<Respuesta<Posicion>> consultarTorneo(@RequestParam("idTorneo") final Long id) {
+
+		ResponseEntity<Respuesta<Posicion>> respuestaSolicitud;
+		Respuesta<Posicion> respuesta = new Respuesta<>();
+		boolean datosValidos = true;
+
+		try {
+
+			validadores.validarDatosCodigo(id.toString(),respuesta,datosValidos);
+
+			if (datosValidos) {
+				List<Posicion> listaPosicions = posicionFachada.consultarPorTorneo(id);
+				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPosicionControlador.USUARIO_INFORMACION_OBTENER_POSICION).getContenido();
+				respuesta.agregarMensaje(mensajeUsuario);
+				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
+				respuesta.setResultado(listaPosicions);
+				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
+			} else {
+				respuesta.setEstado(EstadoRespuestaEnum.ERROR);
+				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+			}
+		} catch (PILAEExcepcion excepcion) {
+			respuesta.agregarMensaje(excepcion.getTextoUsuario());
+			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
+			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+		} catch (Exception excepcion) {
+			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosPosicionControlador.USUARIO_ERROR_INESPERADO_OBTENER_POSICION).getContenido();
+			respuesta.agregarMensaje(mensajeUsuario);
+			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
+			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+		}
+
+		return respuestaSolicitud;
+	}
 
 }

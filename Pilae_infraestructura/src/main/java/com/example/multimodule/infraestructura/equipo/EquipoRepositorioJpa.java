@@ -12,5 +12,5 @@ import java.util.List;
 @Transactional
 @Repository
 public interface EquipoRepositorioJpa extends JpaRepository<EquipoEntidad, Long> {
-    List<EquipoEntidad> findByTorneo(TorneoEntidad torneo);
+    List<EquipoEntidad> findByFkTorneo(TorneoEntidad fkTorneo);
 }

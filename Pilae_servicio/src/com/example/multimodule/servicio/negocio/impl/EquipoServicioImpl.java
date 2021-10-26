@@ -6,7 +6,6 @@ import com.example.multimodule.entidad.TorneoEntidad;
 import com.example.multimodule.infraestructura.equipo.EquipoRepositorioJpa;
 import com.example.multimodule.infraestructura.posicion.PosicionRepositorioJpa;
 import com.example.multimodule.infraestructura.torneo.TorneoRepositorioJpa;
-import com.example.multimodule.servicio.ensamblador.dto.implementacion.TorneoEnsamblador;
 import com.example.multimodule.servicio.ensamblador.entidad.implementacion.EquipoEnsambladorEntidad;
 import com.example.multimodule.servicio.negocio.EquipoServicio;
 import com.example.multimodule.servicio.utilitario.EquipoConvertorUtilitario;
@@ -84,18 +83,18 @@ public class EquipoServicioImpl  implements EquipoServicio {
             String mensajeTecnico = "equipo no puede estar vacío";
             throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
         }
-
-        Optional<EquipoEntidad> resultadosConsulta = equipoRepositorio.findById(equipoDominio.getCodigo());
-        if (resultadosConsulta.isPresent()) {
-            String mensajeUsuario = "equipo con el codigo existente";
-            String mensajeTecnico = "equipo con el codigo existente";
-            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        if(Objects.nonNull(equipoDominio.getCodigo())) {
+            Optional<EquipoEntidad> resultadosConsulta = equipoRepositorio.findById(equipoDominio.getCodigo());
+            if (resultadosConsulta.isPresent()) {
+                String mensajeUsuario = "equipo con el codigo existente";
+                String mensajeTecnico = "equipo con el codigo existente";
+                throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+            }
         }
-
         ObtenerTorneoDelPartido(torneoId,equipoDominio);
         EquipoEntidad equipoEntidad = EquipoEnsambladorEntidad.obtenerEquipoEnsambladorEntidad().ensamblarEntidad(equipoDominio);
         equipoRepositorio.save(equipoEntidad);
-        crearTablaDePosiciones(equipoDominio);
+        crearTablaDePosiciones(equipoEntidad);
     }
 
     @Override
@@ -141,6 +140,25 @@ public class EquipoServicioImpl  implements EquipoServicio {
         equipoRepositorio.delete(equipoEntidad);
     }
 
+    @Override
+    public List<EquipoDominio> obtenerPorTorneo(Long torneoId) {
+        if (UtilTexto.estaVacia(torneoId.toString())) {
+            String mensajeUsuario = "el id esta vacío";
+            String mensajeTecnico = "el id esta vacío";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        }
+
+        List<EquipoEntidad> equiposEntidad = equipoRepositorio.findByFkTorneo(obtenerTorneoEntidad(torneoId));
+        if(equiposEntidad.isEmpty()){
+            String mensajeUsuario = "la lista de equipos está vacía";
+            String mensajeTecnico = "la lista de equipos está vacía";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        }else{
+            List<EquipoDominio> equipoDominios = EquipoEnsambladorEntidad.obtenerEquipoEnsambladorEntidad().ensamblarListaDominio(equiposEntidad);
+            return equipoDominios;
+        }
+    }
+
     private void cambiarValores(EquipoDominio equipoNuevo, EquipoDominio equipo) {
         equipo.setGenero(equipoNuevo.getGenero());
         equipo.setLocacion(equipoNuevo.getLocacion());
@@ -154,11 +172,19 @@ public class EquipoServicioImpl  implements EquipoServicio {
             throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
         });
         TorneoDominio torneoDominio = TorneoConvertorUtilitario.convertirTorneoEntidadEnTorneoDominio(torneo);
-        equipo.setTorneo(torneoDominio);
+        equipo.setFkTorneo(torneoDominio);
     }
-    public void crearTablaDePosiciones(EquipoDominio equipoDominio) {
+    private TorneoEntidad obtenerTorneoEntidad(Long torneoId) {
+        TorneoEntidad torneo =torneoRepositorio.findById(torneoId).orElseThrow(()->{
+            String mensajeUsuario = "Torneo no encontrado";
+            String mensajeTecnico = "Torneo no encontrado";
+            throw PILAEDominioExcepcion.crear(TipoExcepcionEnum.NEGOCIO, mensajeUsuario, mensajeTecnico);
+        });
+        return torneo;
+    }
+
+    public void crearTablaDePosiciones(EquipoEntidad equipoDominio) {
         PosicionEntidad posicionEntidad = new PosicionEntidad();
-        posicionEntidad.setCodigo(equipoDominio.getCodigo());
         posicionEntidad.setPuntos(0);
         posicionEntidad.setPartidosEmpatados(0);
         posicionEntidad.setPartidosPerdidos(0);
@@ -167,8 +193,8 @@ public class EquipoServicioImpl  implements EquipoServicio {
         posicionEntidad.setGolesDiferencia(0);
         posicionEntidad.setGolesFavor(0);
         posicionEntidad.setGolesContra(0);
-        posicionEntidad.setFkTorneo(TorneoConvertorUtilitario.convertirTorneoDominioEnTorneoEntidad(equipoDominio.getTorneo()));
-        posicionEntidad.setFkEquipo(EquipoConvertorUtilitario.convertirEquipoDominioEnEquipoEntidad(equipoDominio));
+        posicionEntidad.setFkTorneo(equipoDominio.getFkTorneo());
+        posicionEntidad.setFkEquipo(equipoDominio);
         posicionRepositorioJpa.save(posicionEntidad);
     }
 

@@ -49,7 +49,6 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.mockito:mockito-junit-jupiter:3.9.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.skyscreamer:jsonassert:1.5.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: com.vaadin.external.google:android-json:0.0.20131108.vaadin1" level="project" />
-    <orderEntry type="library" scope="TEST" name="Maven: org.springframework:spring-test:5.3.8" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.xmlunit:xmlunit-core:2.8.2" level="project" />
     <orderEntry type="library" name="Maven: org.springframework.boot:spring-boot-test:2.5.2" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.12" level="project" />
@@ -122,5 +121,7 @@
     <orderEntry type="module" module-name="Mensajes_Transversal" />
     <orderEntry type="module" module-name="Mensajes_DTO" />
     <orderEntry type="module" module-name="Pilae_dominio" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-test:5.3.8" level="project" />
+    <orderEntry type="library" name="Maven: org.mockito:mockito-all:1.9.5" level="project" />
   </component>
 </module>

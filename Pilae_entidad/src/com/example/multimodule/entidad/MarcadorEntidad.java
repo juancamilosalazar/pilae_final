@@ -27,6 +27,6 @@ public class MarcadorEntidad implements Serializable {
     private int equipoVisitanteMrc;
 
     @JoinColumn(name = "id_partido", nullable = false)
-    @OneToOne(optional = false, cascade = CascadeType.PERSIST)
+    @OneToOne(optional = false, cascade = CascadeType.MERGE)
     private PartidoEntidad fkPartido;
 }

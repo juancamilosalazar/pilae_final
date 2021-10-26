@@ -45,7 +45,7 @@ public class JugadorControlador {
 				datosValidos = false;
 			} else {
 				validadores.validarDatosNombre(jugador.getNombre(),respuesta,datosValidos);
-				validadores.validarDatosCodigo(jugador.getCodigo().toString(),respuesta,datosValidos);
+
 			}
 
 			if (datosValidos) {
@@ -187,6 +187,41 @@ public class JugadorControlador {
 		return respuestaSolicitud;
 	}
 
+	@GetMapping(params = {"idEquipo"})
+	public ResponseEntity<Respuesta<Jugador>> consultarPorEquipo(@RequestParam("idEquipo") final Long id) {
+
+		ResponseEntity<Respuesta<Jugador>> respuestaSolicitud;
+		Respuesta<Jugador> respuesta = new Respuesta<>();
+		boolean datosValidos = true;
+
+		try {
+
+			validadores.validarDatosCodigo(id.toString(),respuesta,datosValidos);
+
+			if (datosValidos) {
+				List<Jugador> listaJugadors = jugadorFachada.obtenerPorEquipo(id);
+				String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosJugadorControlador.USUARIO_INFORMACION_OBTENER_JUGADOR).getContenido();
+				respuesta.agregarMensaje(mensajeUsuario);
+				respuesta.setEstado(EstadoRespuestaEnum.EXITO);
+				respuesta.setResultado(listaJugadors);
+				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.OK);
+			} else {
+				respuesta.setEstado(EstadoRespuestaEnum.ERROR);
+				respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+			}
+		} catch (PILAEExcepcion excepcion) {
+			respuesta.agregarMensaje(excepcion.getTextoUsuario());
+			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
+			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+		} catch (Exception excepcion) {
+			String mensajeUsuario = obtenerMensaje(CodigosMensajes.CodigosJugadorControlador.USUARIO_ERROR_INESPERADO_OBTENER_JUGADOR).getContenido();
+			respuesta.agregarMensaje(mensajeUsuario);
+			respuesta.setEstado(EstadoRespuestaEnum.ERROR);
+			respuestaSolicitud = new ResponseEntity<>(respuesta, HttpStatus.BAD_REQUEST);
+		}
+
+		return respuestaSolicitud;
+	}
 	@GetMapping
 	public ResponseEntity<Respuesta<Jugador>> consultar() {
 		ResponseEntity<Respuesta<Jugador>> respuestaSolicitud;

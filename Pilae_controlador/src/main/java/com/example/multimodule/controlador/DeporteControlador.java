@@ -47,7 +47,7 @@ public class DeporteControlador {
 				datosValidos = false;
 			} else {
 				validadores.validarDatosNombre(deporte.getNombre(),respuesta,datosValidos);
-				validadores.validarDatosCodigo(deporte.getCodigo().toString(),respuesta,datosValidos);
+
 			}
 
 			if (datosValidos) {
@@ -92,7 +92,6 @@ public class DeporteControlador {
 			} else {
 				deporteNuevo.setCodigo(id);
 				validadores.validarDatosNombre(deporteNuevo.getNombre(),respuesta,datosValidos);
-				validadores.validarDatosCodigo(deporteNuevo.getCodigo().toString(),respuesta,datosValidos);
 			}
 
 			if (datosValidos) {

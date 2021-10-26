@@ -47,7 +47,7 @@ public class PartidoControlador {
 				datosValidos = false;
 			} else {
 				//validadores.validarDatosNombre(partido.get(),respuesta,datosValidos);
-				validadores.validarDatosCodigo(partido.getCodigo().toString(),respuesta,datosValidos);
+
 			}
 
 			if (datosValidos) {
@@ -208,7 +208,7 @@ public class PartidoControlador {
 				respuesta.agregarMensaje(mensajeUsuario);
 				datosValidos = false;
 			} else {
-				validadores.validarDatosCodigo(marcador.getCodigo().toString(),respuesta,datosValidos);
+				validadores.validarDatosCodigo(idPartido.toString(),respuesta,datosValidos);
 			}
 
 			if (datosValidos) {
