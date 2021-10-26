@@ -25,7 +25,7 @@
     <bytecodeTargetLevel>
       <module name="Mensajes_Api" target="11" />
       <module name="Mensajes_Datos" target="1.8" />
-      <module name="Mensajes_DTO" target="11" />
+      <module name="Mensajes_DTO" target="1.5" />
       <module name="Mensajes_Negocio" target="1.8" />
       <module name="Mensajes_Transversal" target="1.8" />
       <module name="Pilae_controlador" target="1.8" />
