@@ -25,17 +25,17 @@
     <bytecodeTargetLevel>
       <module name="Mensajes_Api" target="11" />
       <module name="Mensajes_Datos" target="1.8" />
-      <module name="Mensajes_DTO" target="1.5" />
+      <module name="Mensajes_DTO" target="11" />
       <module name="Mensajes_Negocio" target="1.8" />
       <module name="Mensajes_Transversal" target="1.8" />
       <module name="Pilae_controlador" target="1.8" />
-      <module name="Pilae_dominio" target="1.5" />
-      <module name="Pilae_dto" target="1.5" />
-      <module name="Pilae_entidad" target="1.5" />
-      <module name="Pilae_infraestructura" target="1.5" />
-      <module name="Pilae_servicio" target="1.5" />
+      <module name="Pilae_dominio" target="11" />
+      <module name="Pilae_dto" target="11" />
+      <module name="Pilae_entidad" target="11" />
+      <module name="Pilae_infraestructura" target="11" />
+      <module name="Pilae_servicio" target="11" />
       <module name="Pilae_transversal" target="11" />
-      <module name="Transversal" target="1.5" />
+      <module name="Transversal" target="11" />
       <module name="UCOBANK_Api" target="11" />
       <module name="UCOBANK_Datos" target="1.8" />
       <module name="UCOBANK_Dominio" target="11" />
