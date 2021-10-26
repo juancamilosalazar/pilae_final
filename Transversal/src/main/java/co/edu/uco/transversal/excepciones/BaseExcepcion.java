@@ -4,7 +4,7 @@ import co.edu.uco.transversal.utilitarios.UtilObjeto;
 import co.edu.uco.transversal.utilitarios.UtilTexto;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 
-public class BaseExcepcion extends RuntimeException { 
+public class BaseExcepcion extends RuntimeException {
 
 	private static final long serialVersionUID = -7398921408524414314L;
 	private TipoExcepcionEnum tipo;
