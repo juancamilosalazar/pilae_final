@@ -37,7 +37,7 @@ public class Respuesta<T> {
 	}
 
 	public void setMensajesRepuesta(List<String> mensajesRepuesta) {
-		this.mensajesRepuesta = UtilObjeto.obtenerValorPorDefecto(mensajesRepuesta, new ArrayList<>());
+		this.mensajesRepuesta = UtilObjeto.obtenerValorPorDefecto(mensajesRepuesta, new ArrayList());
 	}
 
 	public List<T> getResultado() {
@@ -48,6 +48,6 @@ public class Respuesta<T> {
 	}
 
 	public void setResultado(List<T> resultado) {
-		this.resultado = UtilObjeto.obtenerValorPorDefecto(resultado, new ArrayList<>());
+		this.resultado = UtilObjeto.obtenerValorPorDefecto(resultado, new ArrayList());
 	}
 }
