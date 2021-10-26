@@ -7,13 +7,13 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="Transversal" />
         <module name="Mensajes_Datos" />
         <module name="Mensajes_DTO" />
+        <module name="Pilae_transversal" />
         <module name="Mensajes_Negocio" />
         <module name="Pilae_dto" />
         <module name="Pilae_controlador" />
-        <module name="Pilae_transversal" />
+        <module name="Transversal" />
         <module name="Mensajes_Transversal" />
         <module name="Mensajes_Api" />
         <module name="Pilae_servicio" />
@@ -30,7 +30,7 @@
       <module name="Mensajes_Transversal" target="1.8" />
       <module name="Pilae_controlador" target="1.8" />
       <module name="Pilae_dominio" target="11" />
-      <module name="Pilae_dto" target="11" />
+      <module name="Pilae_dto" target="1.5" />
       <module name="Pilae_entidad" target="11" />
       <module name="Pilae_infraestructura" target="11" />
       <module name="Pilae_servicio" target="11" />
