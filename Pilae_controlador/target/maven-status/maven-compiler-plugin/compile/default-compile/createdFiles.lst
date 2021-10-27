@@ -1,0 +1,13 @@
+com\example\multimodule\controlador\MarcadorControlador.class
+com\example\multimodule\controlador\EquipoControlador.class
+com\example\multimodule\controlador\JugadorControlador.class
+com\example\multimodule\seguridad\OktaConfiguracion.class
+com\example\multimodule\controlador\PartidoControlador.class
+com\example\multimodule\PilaeApplication.class
+com\example\multimodule\utilitario\Validadores.class
+com\example\multimodule\controlador\TorneoControlador.class
+com\example\multimodule\controlador\DeporteControlador.class
+com\example\multimodule\configuracion\Configurador.class
+com\example\multimodule\PilaeApplication$1.class
+com\example\multimodule\utilitario\ConversorDeDataUtilitario.class
+com\example\multimodule\controlador\PosicionControlador.class

@@ -1,0 +1,4 @@
+co\edu\uco\mensajes\dto\AplicacionDTO.class
+co\edu\uco\mensajes\dto\MensajeDTO.class
+co\edu\uco\mensajes\enumerador\TipoMensajeEnum.class
+co\edu\uco\mensajes\enumerador\CategoriaMensajeEnum.class

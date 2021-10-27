@@ -1,0 +1,7 @@
+com\example\multimodule\infraestructura\jugador\JugadorRepositorioJpa.class
+com\example\multimodule\infraestructura\partido\PartidoRepositorioJpa.class
+com\example\multimodule\infraestructura\torneo\TorneoRepositorioJpa.class
+com\example\multimodule\infraestructura\marcador\MarcadorRepositorioJpa.class
+com\example\multimodule\infraestructura\deporte\DeporteRepositorioJpa.class
+com\example\multimodule\infraestructura\equipo\EquipoRepositorioJpa.class
+com\example\multimodule\infraestructura\posicion\PosicionRepositorioJpa.class

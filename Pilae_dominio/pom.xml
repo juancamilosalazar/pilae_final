@@ -9,15 +9,6 @@
 	<description>Componente encargado de garantizar el cumplimiento y flujo de toda la lógica y el proceso de negocio. Se dice que es el componente "core" (corazón o principal) de la aplicación. Es un componente que está custodiado del acceso no autorizado y que gestiona sus propias reglas de interacción con otras capas de forma privada.</description>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
-				<configuration>
-					<release>11</release>
-				</configuration>
-			</plugin>
-		</plugins>
 	</build>
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.springframework.boot/spring-boot-starter-actuator -->

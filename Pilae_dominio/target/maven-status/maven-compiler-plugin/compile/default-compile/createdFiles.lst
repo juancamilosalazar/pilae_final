@@ -1,0 +1,11 @@
+main\com\example\multimodule\dominio\PartidoDominio.class
+main\com\example\multimodule\dominio\reglas\ReglaValidacion.class
+main\com\example\multimodule\dominio\DeporteDominio.class
+main\com\example\multimodule\dominio\reglas\implementacion\EquipoDominioReglaValidacion$1.class
+main\com\example\multimodule\dominio\EquipoDominio.class
+main\com\example\multimodule\dominio\JugadorDominio.class
+main\com\example\multimodule\dominio\TorneoDominio.class
+main\com\example\multimodule\dominio\PosicionDominio.class
+main\com\example\multimodule\dominio\MarcadorDominio.class
+main\com\example\multimodule\dominio\reglas\enumerador\ReglaEnum.class
+main\com\example\multimodule\dominio\reglas\implementacion\EquipoDominioReglaValidacion.class
