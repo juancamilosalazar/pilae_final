@@ -17,6 +17,8 @@
 
     <modules>
         <module>Pilae_dto</module>
+        <module>Mensajes_Transversal</module>
+        <module>Mensajes_DTO</module>
         <module>Pilae_entidad</module>
         <module>Pilae_servicio</module>
         <module>Pilae_dominio</module>

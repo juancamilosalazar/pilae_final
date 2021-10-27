@@ -69,10 +69,14 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+
 		</plugins>
 	</build>
 	<organization>
 		<name>UCO</name>
 		<url>http://www.uco.edu.co</url>
 	</organization>
+	<properties>
+		<start-class>com.example.multimodule.PilaeApplication</start-class>
+	</properties>
 </project>
