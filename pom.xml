@@ -16,13 +16,13 @@
     <version>1.0-SNAPSHOT</version>
 
     <modules>
-        <module>Pilae_controlador</module>
-        <module>Pilae_servicio</module>
-        <module>Pilae_dominio</module>
         <module>Pilae_dto</module>
         <module>Pilae_entidad</module>
+        <module>Pilae_servicio</module>
+        <module>Pilae_dominio</module>
         <module>Pilae_infraestructura</module>
         <module>Pilae_transversal</module>
+        <module>Pilae_controlador</module>
         <module>Transversal</module>
     </modules>
 
