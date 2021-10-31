@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Respuesta.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Transversal</a> &gt; <a href="index.source.html" class="el_package">co.edu.uco.transversal.respuesta.rest</a> &gt; <span class="el_source">Respuesta.java</span></div><h1>Respuesta.java</h1><pre class="source lang-java linenums">package co.edu.uco.transversal.respuesta.rest;
+
+import co.edu.uco.transversal.utilitarios.UtilObjeto;
+import co.edu.uco.transversal.utilitarios.UtilTexto;
+
+import java.util.ArrayList;
+import java.util.List;
+
+<span class="nc" id="L9">public class Respuesta&lt;T&gt; {</span>
+
+	private EstadoRespuestaEnum estado;
+	private List&lt;String&gt; mensajesRepuesta;
+	private List&lt;T&gt; resultado;
+
+	public void agregarMensaje(String mensaje) {
+<span class="nc bnc" id="L16" title="All 2 branches missed.">		if(!UtilTexto.estaVacia(mensaje)) {</span>
+<span class="nc" id="L17">			getMensajesRepuesta().add(mensaje);</span>
+		}
+<span class="nc" id="L19">	}</span>
+	
+	public EstadoRespuestaEnum getEstado() {
+<span class="nc bnc" id="L22" title="All 2 branches missed.">		if (UtilObjeto.objetoEsNulo(estado)) {</span>
+<span class="nc" id="L23">			setEstado(estado);</span>
+		}
+<span class="nc" id="L25">		return estado;</span>
+	}
+
+	public void setEstado(EstadoRespuestaEnum estado) {
+<span class="nc" id="L29">		this.estado = UtilObjeto.obtenerValorPorDefecto(estado, EstadoRespuestaEnum.ERROR);</span>
+<span class="nc" id="L30">	}</span>
+
+	public List&lt;String&gt; getMensajesRepuesta() {
+<span class="nc bnc" id="L33" title="All 2 branches missed.">		if (UtilObjeto.objetoEsNulo(mensajesRepuesta)) {</span>
+<span class="nc" id="L34">			setMensajesRepuesta(mensajesRepuesta);</span>
+		}
+<span class="nc" id="L36">		return mensajesRepuesta;</span>
+	}
+
+	public void setMensajesRepuesta(List&lt;String&gt; mensajesRepuesta) {
+<span class="nc" id="L40">		this.mensajesRepuesta = UtilObjeto.obtenerValorPorDefecto(mensajesRepuesta, new ArrayList());</span>
+<span class="nc" id="L41">	}</span>
+
+	public List&lt;T&gt; getResultado() {
+<span class="nc bnc" id="L44" title="All 2 branches missed.">		if (UtilObjeto.objetoEsNulo(resultado)) {</span>
+<span class="nc" id="L45">			setResultado(resultado);</span>
+		}
+<span class="nc" id="L47">		return resultado;</span>
+	}
+
+	public void setResultado(List&lt;T&gt; resultado) {
+<span class="nc" id="L51">		this.resultado = UtilObjeto.obtenerValorPorDefecto(resultado, new ArrayList());</span>
+<span class="nc" id="L52">	}</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

@@ -9,6 +9,7 @@
 	<description>Componente encargado de garantizar el cumplimiento y flujo de toda la lógica y el proceso de negocio. Se dice que es el componente "core" (corazón o principal) de la aplicación. Es un componente que está custodiado del acceso no autorizado y que gestiona sus propias reglas de interacción con otras capas de forma privada.</description>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
+
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -16,6 +17,20 @@
 					<source>1.8</source>
 					<target>1.8</target>
 				</configuration>
+				<executions>
+					<execution>
+						<id>add-test-source</id>
+						<phase>generate-test-sources</phase>
+						<goals>
+							<goal>add-test-source</goal>
+						</goals>
+						<configuration>
+							<sources>
+								<source>src/test/java</source>
+							</sources>
+						</configuration>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

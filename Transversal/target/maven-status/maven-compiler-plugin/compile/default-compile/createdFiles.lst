@@ -1,0 +1,8 @@
+co\edu\uco\transversal\respuesta\rest\Respuesta.class
+co\edu\uco\transversal\respuesta\rest\EstadoRespuestaEnum.class
+co\edu\uco\transversal\excepciones\BaseExcepcion.class
+co\edu\uco\transversal\excepciones\TipoExcepcionEnum.class
+co\edu\uco\transversal\utilitarios\ParametroDTO.class
+co\edu\uco\transversal\utilitarios\UtilTexto.class
+co\edu\uco\transversal\excepciones\ComponenteEnum.class
+co\edu\uco\transversal\utilitarios\UtilObjeto.class

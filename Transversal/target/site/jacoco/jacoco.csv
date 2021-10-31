@@ -1,0 +1,9 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+Transversal,co.edu.uco.transversal.respuesta.rest,EstadoRespuestaEnum,24,0,0,0,2,0,1,0,1,0
+Transversal,co.edu.uco.transversal.respuesta.rest,Respuesta,70,0,8,0,19,0,12,0,8,0
+Transversal,co.edu.uco.transversal.excepciones,ComponenteEnum,86,0,0,0,3,0,2,0,2,0
+Transversal,co.edu.uco.transversal.excepciones,BaseExcepcion,119,0,0,0,29,0,12,0,12,0
+Transversal,co.edu.uco.transversal.excepciones,TipoExcepcionEnum,47,0,0,0,9,0,5,0,5,0
+Transversal,co.edu.uco.transversal.utilitarios,UtilTexto,0,81,1,3,0,13,1,8,0,7
+Transversal,co.edu.uco.transversal.utilitarios,UtilObjeto,6,4,1,1,1,1,2,1,1,1
+Transversal,co.edu.uco.transversal.utilitarios,ParametroDTO,0,31,0,0,0,11,0,6,0,6

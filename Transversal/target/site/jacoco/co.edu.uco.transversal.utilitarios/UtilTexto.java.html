@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>UtilTexto.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Transversal</a> &gt; <a href="index.source.html" class="el_package">co.edu.uco.transversal.utilitarios</a> &gt; <span class="el_source">UtilTexto.java</span></div><h1>UtilTexto.java</h1><pre class="source lang-java linenums">package co.edu.uco.transversal.utilitarios;
+
+import org.apache.commons.lang3.StringUtils;
+
+import static co.edu.uco.transversal.utilitarios.UtilObjeto.objetoEsNulo;
+
+public class UtilTexto {
+
+	private static final String PATRON_SOLO_DIGITOS = &quot;[0-9]+&quot;;
+	private static final String PATRON_SOLO_LETRAS_Y_ESPACIOS = &quot;[A-Za-z������������ ]+&quot;;
+	private static final String FORMATO_EXPRESION_REGULAR = &quot;^{1}$&quot;;
+	public static final String VACIO = &quot;&quot;;
+
+	private UtilTexto() {
+	}
+
+	public static String obtenerValorDefecto(String valor, String defecto) {
+<span class="fc" id="L18">		return StringUtils.defaultString(valor, defecto);</span>
+	}
+
+	public static String aplicarTrim(String valor) {
+<span class="fc" id="L22">		return StringUtils.trimToEmpty(valor);</span>
+	}
+
+	public static boolean estaVacia(String valor) {
+<span class="fc" id="L26">		return StringUtils.EMPTY.equals(aplicarTrim(valor));</span>
+	}
+
+	public static String reemplazar(String cadena, ParametroDTO... parametros) {
+<span class="fc" id="L30">		String cadenaRetorno = aplicarTrim(cadena);</span>
+
+<span class="fc bfc" id="L32" title="All 2 branches covered.">		for (ParametroDTO parametroDTO : parametros) {</span>
+<span class="pc bpc" id="L33" title="1 of 2 branches missed.">			if (!objetoEsNulo(parametroDTO)) {</span>
+<span class="fc" id="L34">				cadenaRetorno = cadenaRetorno.replace(aplicarTrim(parametroDTO.getClave()), aplicarTrim(parametroDTO.getValor()));</span>
+			}
+		}
+
+<span class="fc" id="L38">		return cadenaRetorno;</span>
+	}
+
+	public static boolean cumplePatron(String cadena, String patron) {
+<span class="fc" id="L42">		return aplicarTrim(cadena).matches(aplicarTrim(patron));</span>
+	}
+
+	public static boolean contieneSoloDigitos(String cadena) {
+<span class="fc" id="L46">		String expresionRegular = reemplazar(FORMATO_EXPRESION_REGULAR, ParametroDTO.crear(&quot;{1}&quot;, PATRON_SOLO_DIGITOS));</span>
+<span class="fc" id="L47">		return cumplePatron(cadena, expresionRegular);</span>
+	}
+
+	public static boolean contieneSoloLetrasEspacios(String cadena) {
+<span class="fc" id="L51">		String expresionRegular = reemplazar(FORMATO_EXPRESION_REGULAR, ParametroDTO.crear(&quot;{1}&quot;, PATRON_SOLO_LETRAS_Y_ESPACIOS));</span>
+<span class="fc" id="L52">		return cumplePatron(cadena, expresionRegular);</span>
+	}
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>
