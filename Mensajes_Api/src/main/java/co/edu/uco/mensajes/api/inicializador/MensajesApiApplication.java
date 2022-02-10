@@ -20,10 +20,10 @@ public class MensajesApiApplication {
 	@Bean
 	public JedisConnectionFactory jedisConnectionFactory() {
 		RedisStandaloneConfiguration configuracionRedis = new RedisStandaloneConfiguration();
-		configuracionRedis.setHostName("redis-19897.c60.us-west-1-2.ec2.cloud.redislabs.com");
-		configuracionRedis.setPort(19897);
+		configuracionRedis.setHostName("redis-18171.c289.us-west-1-2.ec2.cloud.redislabs.com");
+		configuracionRedis.setPort(18171);
 		configuracionRedis.setDatabase(0);
-		configuracionRedis.setPassword(RedisPassword.of("qwf2OvWi2tQcbJ5TipKWtpesfi0srBEN"));
+		configuracionRedis.setPassword(RedisPassword.of("WhY2HQDv5i4JvbQUYtltf7aBClLvPSnB"));
 
 		JedisClientConfiguration.JedisClientConfigurationBuilder configuracionJedis = JedisClientConfiguration.builder();
 		configuracionJedis.connectTimeout(Duration.ofSeconds(60));
