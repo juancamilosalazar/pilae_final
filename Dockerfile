@@ -90,5 +90,5 @@ COPY Pilae_transversal/src /opt/app/Pilae_transversal
 FROM openjdk:11.0.11-slim
 WORKDIR /opt/app
 ADD Mensajes_Api/target/Mensajes_Api-0.0.1-SNAPSHOT.jar /usr/share/Mensajes_Api-0.0.1-SNAPSHOT.jar
-EXPOSE 8091
+EXPOSE 8092
 ENTRYPOINT ["java", "-jar", "/usr/share/Mensajes_Api-0.0.1-SNAPSHOT.jar"]
