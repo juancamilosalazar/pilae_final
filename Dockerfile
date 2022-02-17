@@ -30,6 +30,8 @@ WORKDIR /opt/app/Mensajes_Datos
 RUN mvn clean install
 WORKDIR /opt/app/Mensajes_Negocio
 RUN mvn clean install
+WORKDIR /opt/app/Mensajes_Api
+RUN mvn clean install
 
 WORKDIR /opt/app/Pilae_dto
 RUN mvn clean install
