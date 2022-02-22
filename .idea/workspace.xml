@@ -20,9 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="57874ae6-7d95-4c22-b5be-1449582eecbe" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Mensajes_Api/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Mensajes_Api/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mensajes_Api/target/Mensajes_Api-0.0.1-SNAPSHOT.jar" beforeDir="false" afterPath="$PROJECT_DIR$/Mensajes_Api/target/Mensajes_Api-0.0.1-SNAPSHOT.jar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mensajes_Api/target/Mensajes_Api-0.0.1-SNAPSHOT.jar.original" beforeDir="false" afterPath="$PROJECT_DIR$/Mensajes_Api/target/Mensajes_Api-0.0.1-SNAPSHOT.jar.original" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mensajes_Api/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Mensajes_Api/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mensajes_Api/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/Mensajes_Api/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Mensajes_Api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/Mensajes_Api/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -93,22 +95,22 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="119" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1645117633408" />
-    <state width="1323" height="201" key="GridCell.Tab.0.bottom" timestamp="1645113906201">
+    <state width="1323" height="86" key="GridCell.Tab.0.bottom" timestamp="1645563820878">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="201" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1645113906201" />
-    <state width="1323" height="201" key="GridCell.Tab.0.center" timestamp="1645113906201">
+    <state width="1323" height="86" key="GridCell.Tab.0.bottom/0.0.1366.728@0.0.1366.728" timestamp="1645563820878" />
+    <state width="1323" height="86" key="GridCell.Tab.0.center" timestamp="1645563820877">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="201" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1645113906201" />
-    <state width="1323" height="201" key="GridCell.Tab.0.left" timestamp="1645113906201">
+    <state width="1323" height="86" key="GridCell.Tab.0.center/0.0.1366.728@0.0.1366.728" timestamp="1645563820877" />
+    <state width="1323" height="86" key="GridCell.Tab.0.left" timestamp="1645563820877">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="201" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1645113906201" />
-    <state width="1323" height="201" key="GridCell.Tab.0.right" timestamp="1645113906201">
+    <state width="1323" height="86" key="GridCell.Tab.0.left/0.0.1366.728@0.0.1366.728" timestamp="1645563820877" />
+    <state width="1323" height="86" key="GridCell.Tab.0.right" timestamp="1645563820877">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state width="1323" height="201" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1645113906201" />
+    <state width="1323" height="86" key="GridCell.Tab.0.right/0.0.1366.728@0.0.1366.728" timestamp="1645563820877" />
     <state x="390" y="97" width="629" height="534" key="find.popup" timestamp="1645118077667">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
